@@ -1,0 +1,108 @@
+States:
+
+Login Page: 
+
+* We need a LOGGED IN STATE. Initially set to no user. When we select a user from 
+  the dropdown, we will update the state and this will carry forward into the app.
+
+const [loggedIn, setLoggedIn] = useState({})
+
+
+Home Page: 
+
+* We need a FAVOURITES LIST STATE. This will be fetched from the user currently logged 
+  in's favourite list. We will need to ensure that, when updating the faves list, we
+  update both the database as well as setting Faves to update state.
+
+const [favourites, setFavourites] = useState(loggedIn.favourites)
+
+* We need a FRIENDS LIST STATE. This will be fetched from the user currently logged 
+  in's friends list. We will need to ensure that, when updating the friends list, we
+  update both the database as well as setting friends to update state.
+
+const [friends, setFriends] = useState(loggedIn.friends)
+
+* We need a FEED TILE LIST STATE. This will be an array that is common to all users. 
+  Has to be a state so that, whenever we trigger a new item to be published, the Page
+  dynamically re-renders. This will have to be fetched from the database 
+
+const [feedList, setFeedList] = useState(feedList)
+
+
+* (If we are doing what Zhu suggested and having the search results showing where 
+  the main feed was, we will need a SEARCH RESULTS STATE). This will initially be set to
+  an empty array but it will need to fetch from the api depending on what the user has searched.
+
+const [searchResults, setSearchResults] = useState([])
+
+
+**** NOTE ****
+We will need a state to show the comments on the individual tiles right after we have posted one.
+This might be tricky so one we should think about together. 
+
+Podcast Page:
+
+* If we are dynamically showing the rating and comments on the podcast page, we will need
+  a REVIEW STATE. This is so that, when a new review is left, the comment will update and the
+  rating will change. This will have to be pulled from the database to pick up reviews
+  left previously. 
+
+const [reviews, setReviews] = useState(podcast:id.reviews)
+
+
+
+
+Functions:
+
+Login Page: 
+
+onSubmit: 
+  Required on the new user form on the login page. When the user has entered a username, the onsubmit will create a 
+  blank user and add them to our database.
+
+onClick: 
+  When we click on the user that we want to log in as, the onclick should route us straight to the homepage. It should
+  also 'setLoggedIn' to this user.
+
+
+Home Page: 
+
+onSubmit:
+  On our search bar, we shouldn't have an onChange. This will mean that we will send a new request to the api on every
+  key-stroke. This will max our api usage and lead to longer loading times. Instead, we could type what we want to search 
+  for and click a submit button. OnSubmit, this will 'setSearchResults' and display these components instead of the main
+  feed. Note, we will need a way to get back to the feed display. 
+
+onClick:
+  1. Add Friend.
+  An onClick on the feed tile to add that user as a friend. This will trigger the 'setFriends' function to change the state
+  and dynamically update the friends list on screen. 
+
+  2. Add Favourite. 
+  An onClick on the feed tile to add a podcast that has been posted about to faves. This will trigger the 'setFavourites', to
+  change the state and dynamically update the faves list on screen. 
+
+  Note: Podcasts in the trending'faves list on the homescreen won't need onClicks. They can be wrapped in an anchor tag 
+        which can contain a link to their URLs. 
+
+  3. Liking a post
+  When we are liking a post that a user has made, we will need an onClick to add a like to that post. Note: we will probably
+  need another state to show how many likes are on a post dynamically. (eg. when I like a post, I immediately see that change)
+
+
+onSubmit:
+  When we are commenting on a post, we will click 'post' and that onSubmit will add the comment to the post in the database. 
+  It will also have to trigger a change in state so that it is immediately visible. 
+
+
+
+Podcast Page: 
+
+onClick:
+  1. Add Favourite. 
+  An onClick on the feed tile to add a podcast that has been posted about to faves. This will trigger the 'setFavourites', to
+  change the state and dynamically update the faves list on screen. 
+
+onSubmit:
+  1. Add Review button
+  Adding a review will be a form. This onSubmit will change the review state so that they dynamically update. 
