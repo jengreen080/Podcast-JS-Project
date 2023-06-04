@@ -18,7 +18,7 @@ const TrendingList = ({displayTop5Podcasts, top5pods}) => {
     <div className='trending-container'>
       <h2>Trending</h2>
       <ul>
-        <p>Below</p>
+        <li>Test</li>
         {displayTop5Podcasts}
       </ul>
       
