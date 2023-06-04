@@ -7,6 +7,9 @@ import MainFeed from './components/MainFeed';
 import TrendingList from './components/TrendingList';
 import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
+import { useState, useEffect } from 'react';
+import { getUsers, addUser } from './services/PodcastUsersServices'
+
 
 const Get_Top_5_Podcasts = gql`
     query getTop5Podcasts {
@@ -44,8 +47,6 @@ const DisplayTop5Podcasts = () => {
 }
 
 
-
-
 // Created three routes. 1. Login Page. 2. Home Page. 3. Podcast Page
 // CONCERN - we dont want our NavBar/Faves/Trending to be visible on the login page as we dont want
 // to be able to access the main page without being loged in. Unsure how to remove the
@@ -53,13 +54,55 @@ const DisplayTop5Podcasts = () => {
 // Maybe we can use a turnary to say, if logged in user name = "", do not show links/searchbar 
 // in nav bar? 
 function App() {
+
+// Logins
+
+const [loggedIn, setLoggedIn] = useState({})
+
+const handleLogin = (event) => {
+  event.preventDefault()
+  const userId = event.target.value
+  const userToLogin = allUsers.find(user => userId == user._id)
+  setLoggedIn(userToLogin)
+}
+
+const [allUsers, setAllUsers] = useState([])
+
+
+
+// New User
+const [newUser, setNewUser] = useState({})
+
+const handleNewUser = (event) => {
+  const nameofUser = event.target.value
+  setNewUser({
+    username: nameofUser,
+    friends: [],
+    wishlist: []
+  })
+  console.log(newUser)
+}
+
+const createUser = () => {
+  addUser(newUser)
+}
+
+
+
+
+useEffect(() => {
+  getUsers().then((allUsers) => {
+    setAllUsers(allUsers)
+  })
+}, [])
+
   return (
     <Router>
       <NavBar/>
       <TrendingList DisplayTop5Podcasts={DisplayTop5Podcasts} top5pods={top5pods}/>
       <FavouritesList />
       <Routes>
-        <Route path='/login' element={<LoginPage/>}/>
+        <Route path='/login' element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser}/>}/>
         <Route path='/' element={<HomePage/>} />
         <Route path='/podcast/:id'/>
         <Route path='test' element={<DisplayTop5Podcasts/>} />
