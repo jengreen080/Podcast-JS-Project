@@ -36,3 +36,73 @@
     transform: rotate(360deg);
   }
 }
+
+/* Nav-CSS */
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightpink;
+  padding: 0 10vw;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.nav-title {
+  background-color: lightblue;
+}
+
+.nav-form {
+  background-color: lightblue;
+}
+
+.nav-link-container {
+  display: flex;
+  list-style-type: none;
+  width: 20vw;
+  justify-content: space-evenly;
+  background-color: lightblue;
+}
+
+/* Home Page CSS */
+
+.home-container {
+  padding: 10vh 17.5vw;
+}
+
+/* Trending CSS */
+
+.trending-container {
+  position: fixed;
+  background-color: lightblue;
+  padding: 10vh 0;
+  width: 15vw;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+
+/* Favourites CSS */
+
+.favourites-container {
+  position: fixed;
+  background-color: lightblue;
+  padding: 10vh 0;
+  width: 15vw;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+/* Login Page CSS */
+
+.login-container {
+  padding: 10vh 17.5vw;
+}
