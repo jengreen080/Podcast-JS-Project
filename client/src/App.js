@@ -1,6 +1,7 @@
 import './App.css';
+import { useNavigate } from "react-router-dom";
 import { useQuery, gql } from '@apollo/client';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import {Routes, Route} from "react-router-dom"
 import NavBar from './components/NavBar';
 import FavouritesList from './components/FavouritesList';
 import MainFeed from './components/MainFeed';
@@ -9,6 +10,7 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import { useState, useEffect } from 'react';
 import { getUsers, addUser } from './services/PodcastUsersServices'
+import Follows from './components/Follows';
 
 
 const Get_Top_5_Podcasts = gql`
@@ -22,7 +24,7 @@ const Get_Top_5_Podcasts = gql`
   }   
 `;
 
-let top5pods = ""
+
 
 const DisplayTop5Podcasts = () => {
   const { loading, error, data } = useQuery(Get_Top_5_Podcasts);
@@ -40,16 +42,11 @@ const DisplayTop5Podcasts = () => {
 }
 
 
-// Created three routes. 1. Login Page. 2. Home Page. 3. Podcast Page
-// CONCERN - we dont want our NavBar/Faves/Trending to be visible on the login page as we dont want
-// to be able to access the main page without being loged in. Unsure how to remove the
-// nav from this screen specifically without adding to all manually. 
-// Maybe we can use a turnary to say, if logged in user name = "", do not show links/searchbar 
-// in nav bar? 
+
 function App() {
 
 // Logins
-
+const navigate = useNavigate();
 const [loggedIn, setLoggedIn] = useState({})
 
 const handleLogin = (event) => {
@@ -57,9 +54,14 @@ const handleLogin = (event) => {
   const userId = event.target.value
   const userToLogin = allUsers.find(user => userId == user._id)
   setLoggedIn(userToLogin)
+  if (userToLogin) {
+ navigate("/");
+}
+
 }
 
 const [allUsers, setAllUsers] = useState([])
+
 
 
 
@@ -106,7 +108,3 @@ useEffect(() => {
 }
 
 export default App;
-// monday to do : FavPodcastService
-
-
-
