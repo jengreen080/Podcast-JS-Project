@@ -71,14 +71,17 @@
 /* Home Page CSS */
 
 .home-container {
-  padding: 10vh 17.5vw;
+  margin: 12.5vh 18vw;
+  height: 1000vh;
+  border-radius: 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 /* Trending CSS */
 
 .trending-container {
   position: fixed;
-  background-color: lightblue;
+  /* background-color: lightblue; */
   padding: 10vh 0;
   width: 15vw;
   left: 0;
@@ -92,7 +95,7 @@
 
 .favourites-container {
   position: fixed;
-  background-color: lightblue;
+  /* background-color: lightblue; */
   padding: 10vh 0;
   width: 15vw;
   right: 0;

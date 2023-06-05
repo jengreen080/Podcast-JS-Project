@@ -101,7 +101,7 @@ useEffect(() => {
         path="/"
         element={
           <>
-            <NavBar />
+            <NavBar/>
             <TrendingList displayTop5Podcasts={<DisplayTop5Podcasts />} />
             <FavouritesList />
             <HomePage />
