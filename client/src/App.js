@@ -140,6 +140,7 @@ useEffect(() => {
 return (
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
+
     <Route path="/" element= {<HomePage 
     displayTop5Podcasts = {DisplayTop5Podcasts} 
     searchTerm={searchTerm} 
@@ -150,6 +151,7 @@ return (
     likeButtonText ={likeButtonText}
     setLikeButtonText = {setLikeButtonText}/>} 
     />
+
     <Route path="/podcast/:id"/>
   </Routes>
 );
