@@ -18,4 +18,4 @@ const NavBar = ({loggedIn}) => {
   );
 }
 
-export default NavBar
+export default NavBar;

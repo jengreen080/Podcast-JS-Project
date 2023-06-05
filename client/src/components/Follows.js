@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
 
-
 const Follows = ({loggedIn}) => {
   return (
     <div className='follows-container'>
@@ -11,5 +10,6 @@ const Follows = ({loggedIn}) => {
     </div>
   );
 }
+
 
 export default Follows;

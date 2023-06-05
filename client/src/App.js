@@ -54,9 +54,9 @@ const handleLogin = (event) => {
   const userId = event.target.value
   const userToLogin = allUsers.find(user => userId == user._id)
   setLoggedIn(userToLogin)
-  if (userToLogin) {
- navigate("/");
-}
+
+  navigate("/");
+
 
 }
 
@@ -93,17 +93,12 @@ useEffect(() => {
 //zhu changed2: 
 // seperate login
   return (
-    <Router>
       <Routes>
         <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-        <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} />} />
+        <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} loggedIn={loggedIn} />} />
         <Route path="/podcast/:id"/>
-  {/* zhu notes: for filtering podcasts from nav bar:  */}
-  {/* optional: podcasts */}
-  {/* <Route path="/podcasts" element={<PodcastsPage/>} /> */}
-  {/* add to fav, post, rating button*/}
       </Routes>
-  </Router>
+
 );
 }
 
