@@ -57,19 +57,23 @@ const DisplayTop5Podcasts = () => {
 
 function App() {
 
+  const [likeCounter, setLikeCounter] = useState(1)
+  
+  // const likeAPost = (likeCounter) => {
+  //   const increaseCounter = likeCounter + 1
+  //   setLikeCounter(increaseCounter)
+// }
+
 // Logins
-const navigate = useNavigate();
-const [loggedIn, setLoggedIn] = useState({})
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState({})
 
-const handleLogin = (event) => {
-  event.preventDefault()
-  const userId = event.target.value
-  const userToLogin = allUsers.find(user => userId == user._id)
-  setLoggedIn(userToLogin)
-
-  navigate("/");
-
-
+  const handleLogin = (event) => {
+    event.preventDefault()
+    const userId = event.target.value
+    const userToLogin = allUsers.find(user => userId == user._id)
+    setLoggedIn(userToLogin)
+    navigate("/");
 }
 
 const [allUsers, setAllUsers] = useState([])
@@ -92,6 +96,7 @@ const addfriend=(friendName)=>{
       addfriend(friend.username)})
   
 }
+
 
 const { loading, error, data } = useQuery(GET_PODCAST_BY_INPUT, {
   variables: { searchTerm },
@@ -133,14 +138,11 @@ useEffect(() => {
 }, [])
 
 
-
-
 return (
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
     <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} testFriend={testFriend}/>} />
     <Route path="/podcast/:id"/>
-
   </Routes>
 );
 }
