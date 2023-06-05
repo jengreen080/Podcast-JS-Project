@@ -80,9 +80,6 @@ const createUser = () => {
   addUser(newUser)
 }
 
-
-
-
 useEffect(() => {
   getUsers().then((allUsers) => {
     setAllUsers(allUsers)
@@ -95,25 +92,15 @@ useEffect(() => {
 // seperate login
   return (
     <Router>
-    <Routes>
-      <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-      <Route
-        path="/"
-        element={
-          <>
-            <NavBar/>
-            <TrendingList displayTop5Podcasts={<DisplayTop5Podcasts />} />
-            <FavouritesList />
-            <HomePage />
-          </>
-        }
-      />
-      <Route path="/podcast/:id"/>
-{/* zhu notes: for filtering podcasts from nav bar:  */}
-{/* optional: podcasts */}
-{/* <Route path="/podcasts" element={<PodcastsPage/>} /> */}
-{/* add to fav, post, rating button*/}
-    </Routes>
+      <Routes>
+        <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
+        <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} />} />
+        <Route path="/podcast/:id"/>
+  {/* zhu notes: for filtering podcasts from nav bar:  */}
+  {/* optional: podcasts */}
+  {/* <Route path="/podcasts" element={<PodcastsPage/>} /> */}
+  {/* add to fav, post, rating button*/}
+      </Routes>
   </Router>
 );
 }

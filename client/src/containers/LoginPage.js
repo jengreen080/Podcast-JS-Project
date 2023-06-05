@@ -12,22 +12,22 @@ const LoginPage = ({loggedIn, setLoggedIn, allUsers, setAllUsers, handleLogin, c
 
   return (
     <div className='login-container'>
-    <h3>LOGIN PAGE</h3>
-      <select onChange={handleLogin}>
-        {userElement}
-      </select>
-
-    <h2>{loggedIn.username} is now logged in</h2>
-
-    <form onSubmit={createUser}>
-      <p>Add a new user...</p>
-      <input placeholder='Username' type='text' onChange={handleNewUser}/>
-      <input type='submit' value='Create'/>
-    </form>
-
-
+      <h3>LOGIN PAGE</h3>
+        <select onChange={handleLogin}>
+          {userElement}
+        </select>
+      <h2>{loggedIn.username} is now logged in</h2>
+      <form onSubmit={createUser}>
+        <p>Add a new user...</p>
+        <input placeholder='Username' type='text' onChange={handleNewUser}/>
+        <input type='submit' value='Create'/>
+      </form>
     </div>
   );
 }
 
 export default LoginPage
+
+
+// ensure below code is incorporated
+// element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
