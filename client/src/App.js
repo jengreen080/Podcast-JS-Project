@@ -45,22 +45,26 @@ const DisplayTop5Podcasts = () => {
 
 function App() {
 
+  const [likeCounter, setLikeCounter] = useState(1)
+  
+  // const likeAPost = (likeCounter) => {
+  //   const increaseCounter = likeCounter + 1
+  //   setLikeCounter(increaseCounter)
+// }
+
 // Logins
-const navigate = useNavigate();
-const [loggedIn, setLoggedIn] = useState({})
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState({})
 
-const handleLogin = (event) => {
-  event.preventDefault()
-  const userId = event.target.value
-  const userToLogin = allUsers.find(user => userId == user._id)
-  setLoggedIn(userToLogin)
-
-  navigate("/");
-
-
+  const handleLogin = (event) => {
+    event.preventDefault()
+    const userId = event.target.value
+    const userToLogin = allUsers.find(user => userId == user._id)
+    setLoggedIn(userToLogin)
+    navigate("/");
 }
 
-const [allUsers, setAllUsers] = useState([])
+  const [allUsers, setAllUsers] = useState([])
 
 
 
@@ -95,7 +99,7 @@ useEffect(() => {
   return (
       <Routes>
         <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-        <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} loggedIn={loggedIn} />} />
+        <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} loggedIn={loggedIn} likeCounter={likeCounter} setLikeCounter = {setLikeCounter}/>} />
         <Route path="/podcast/:id"/>
       </Routes>
 

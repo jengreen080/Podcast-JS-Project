@@ -10,12 +10,12 @@ import styled from 'styled-components';
 // background-color: red;
 // `
 
-const HomePage = ({displayTop5Podcasts,loggedIn}) => {
+const HomePage = ({displayTop5Podcasts,loggedIn, likeCounter, setLikeCounter}) => {
   return (
     <div className='home-container'>
       <NavBar loggedIn={loggedIn}/>
       <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
-      <MainFeed />
+      <MainFeed likeCounter={likeCounter} setLikeCounter={setLikeCounter}/>
       <FavouritesList loggedIn={loggedIn}/>
       <Follows loggedIn={loggedIn}/>
     </div>

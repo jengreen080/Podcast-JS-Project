@@ -7,14 +7,13 @@ import AddToFavourites from './AddToFavourites';
 import styled from 'styled-components'
 
 
-const TileComponent = ({loggedIn}) => {
+const TileComponent = ({loggedIn, likeCounter, setLikeCounter}) => {
   return (
     <div>
-      <p>This is the tile component</p>
       <PodcastImage/>
-      <TileContent loggedIn = {loggedIn}/>
+      <TileContent loggedIn = {loggedIn} />
       <AddToFavourites/>
-      <LikeButton/>
+      <LikeButton likeCounter={likeCounter} setLikeCounter = {setLikeCounter}/>
       <FriendComment/>
     </div>
   );
