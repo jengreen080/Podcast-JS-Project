@@ -4,6 +4,11 @@ import FavouritesList from '../components/FavouritesList';
 import TrendingList from '../components/TrendingList';
 import MainFeed from '../components/MainFeed';
 import Follows from '../components/Follows';
+import styled from 'styled-components';
+
+// const MainFeedStyled = styled`
+// background-color: red;
+// `
 
 const HomePage = ({displayTop5Podcasts,loggedIn}) => {
   return (

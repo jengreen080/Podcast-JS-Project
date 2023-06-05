@@ -4,6 +4,7 @@ import TileContent from './TileContent';
 import FriendComment from './FriendComment';
 import LikeButton from './LikeButton';
 import AddToFavourites from './AddToFavourites';
+import styled from 'styled-components'
 
 
 const TileComponent = ({loggedIn}) => {
