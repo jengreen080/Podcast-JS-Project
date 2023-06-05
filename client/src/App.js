@@ -9,8 +9,20 @@ import TrendingList from './components/TrendingList';
 import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import { useState, useEffect } from 'react';
-import { getUsers, addUser } from './services/PodcastUsersServices'
+import { getUsers, addUser, getUser, updateUser } from './services/PodcastUsersServices'
 import Follows from './components/Follows';
+
+const GET_PODCAST_BY_INPUT = gql`
+      query getOneBySearchTerm($searchTerm: String!) {
+        getPodcastSeries(name: $searchTerm) {
+          uuid
+          name
+          description
+          imageUrl
+      }
+    }
+  `;
+
 
 
 const Get_Top_5_Podcasts = gql`
@@ -36,7 +48,7 @@ const DisplayTop5Podcasts = () => {
     <li key={uuid}>
       <h3>{name}</h3>
       <img src={imageUrl} alt={name} style={{ width: '50px', height: 'auto' }} ></img>
-      {/* <p>{description}</p> */}
+
     </li>
   ))
 }
@@ -61,12 +73,36 @@ const handleLogin = (event) => {
 }
 
 const [allUsers, setAllUsers] = useState([])
+const [searchTerm, setSearchTerm] = useState("")
 
+//Add friends
+const addfriend=(friendName)=>{
+  const copyLoggedInUser = {... loggedIn}
+  const copyOfFriends = [... copyLoggedInUser.friends]
+  copyOfFriends.push(friendName);
+  copyLoggedInUser.friends = copyOfFriends
+  setLoggedIn(copyLoggedInUser)
+  
+  }
+
+  const testFriend = () =>{
+  getUser('647ca89145b1cc39369ba6d2')
+    .then(friend => {
+      console.log(friend)
+      addfriend(friend.username)})
+  
+}
+
+const { loading, error, data } = useQuery(GET_PODCAST_BY_INPUT, {
+  variables: { searchTerm },
+}, [searchTerm]);
+console.log(data)
 
 
 
 // New User
 const [newUser, setNewUser] = useState({})
+
 
 const handleNewUser = (event) => {
   const nameofUser = event.target.value
@@ -75,12 +111,20 @@ const handleNewUser = (event) => {
     friends: [],
     wishlist: []
   })
-  console.log(newUser)
 }
 
 const createUser = () => {
   addUser(newUser)
 }
+
+
+//update new search
+const updateSearchTerm = (event) =>{
+  console.log(event.target.searchTerm.value)
+  setSearchTerm(event.target.searchTerm.value)
+}
+
+
 
 useEffect(() => {
   getUsers().then((allUsers) => {
@@ -90,16 +134,24 @@ useEffect(() => {
 
 
 
-//zhu changed2: 
-// seperate login
-  return (
-      <Routes>
-        <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-        <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} loggedIn={loggedIn} />} />
-        <Route path="/podcast/:id"/>
-      </Routes>
 
+return (
+  <Routes>
+    <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
+    <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} testFriend={testFriend}/>} />
+    <Route path="/podcast/:id"/>
+
+  </Routes>
 );
 }
-
 export default App;
+
+
+// return (
+//   <Routes>
+//     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
+//     <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} loggedIn={loggedIn} testFriend={testFriend}/>} />
+//     <Route path="/podcast/:id"/>
+//   </Routes>
+
+// );
