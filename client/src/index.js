@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import {BrowserRouter as Router} from "react-router-dom"
 
 const client = new ApolloClient({
   uri: 'https://api.taddy.org',
@@ -18,7 +19,10 @@ const client = new ApolloClient({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ApolloProvider client={client}>
+    <Router>
     <App />
+    </Router>
+
   </ApolloProvider>
 );
 

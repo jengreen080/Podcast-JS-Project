@@ -1,9 +1,7 @@
 import React from 'react'
 
 
-
-
-const TrendingList = ({displayTop5Podcasts, top5pods}) => {
+const TrendingList = ({displayTop5Podcasts}) => {
 
   return (
     <div className='trending-container'>
