@@ -5,7 +5,7 @@ import TrendingList from '../components/TrendingList';
 const HomePage = () => {
   return (
     <div className='home-container'>
-    <h3>HOME</h3>
+    {/* <h3>HOME</h3> */}
     </div>
   );
 }
