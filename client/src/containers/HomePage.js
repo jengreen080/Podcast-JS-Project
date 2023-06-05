@@ -3,16 +3,16 @@ import NavBar from '../components/NavBar';
 import FavouritesList from '../components/FavouritesList';
 import TrendingList from '../components/TrendingList';
 import MainFeed from '../components/MainFeed';
-// import Follows from '../components/Followers';
+import Follows from '../components/Follows';
 
-const HomePage = ({displayTop5Podcasts}) => {
+const HomePage = ({displayTop5Podcasts,loggedIn}) => {
   return (
     <div className='home-container'>
-      <NavBar/>
+      <NavBar loggedIn={loggedIn}/>
       <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
-      <MainFeed/>
-      <FavouritesList/>
-      {/* <Followers/> */}
+      <MainFeed />
+      <FavouritesList loggedIn={loggedIn}/>
+      <Follows loggedIn={loggedIn}/>
     </div>
   );
 }

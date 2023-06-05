@@ -12,10 +12,10 @@ const NavBar = ({loggedIn}) => {
       <ul className='nav-link-container'>
         <li><Link to='/'>Link 1 (home)</Link></li>
         <li><Link to='/login'>Link 2 (login)</Link></li>
-        <li>Logged in as: {loggedIn}</li>
+        <li>Logged in as: {loggedIn.username}</li>
       </ul>
     </div>
   );
 }
 
-export default NavBar
+export default NavBar;
