@@ -6,18 +6,16 @@ import MainFeed from '../components/MainFeed';
 import Follows from '../components/Follows';
 import styled from 'styled-components';
 
-// const MainFeedStyled = styled`
-// background-color: red;
-// `
 
-const HomePage = ({displayTop5Podcasts,loggedIn, likeCounter, setLikeCounter}) => {
+const HomePage = ({displayTop5Podcasts,loggedIn, testFriend,searchTerm, updateSearchTerm, likeCounter, setLikeCounter}) => {
   return (
     <div className='home-container'>
-      <NavBar loggedIn={loggedIn}/>
+      <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm}/>
       <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
       <MainFeed likeCounter={likeCounter} setLikeCounter={setLikeCounter}/>
       <FavouritesList loggedIn={loggedIn}/>
       <Follows loggedIn={loggedIn}/>
+      <button onClick={testFriend}>TEST!</button>
     </div>
   );
 }
