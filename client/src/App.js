@@ -45,10 +45,9 @@ const DisplayTop5Podcasts = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
-    <li key={uuid}>
-      <h3>{name}</h3>
-      <img src={imageUrl} alt={name} style={{ width: '50px', height: 'auto' }} ></img>
-
+    <li key={uuid} id='trending-list-item'>
+      <img src={imageUrl} alt={name} className='trending-item-image'></img>
+      <h3 className='trending-item-title'>{name}</h3>
     </li>
   ))
 }
@@ -98,10 +97,17 @@ const addfriend=(friendName)=>{
 }
 
 
+
+
 const { loading, error, data } = useQuery(GET_PODCAST_BY_INPUT, {
   variables: { searchTerm },
 }, [searchTerm]);
 console.log(data)
+
+// We need the above to return a promise that changes searched podcast to the one returned in the data. We can then refer to this in the podcast component
+// const [searchedPodcast, setSearchedPodcast] = useState({})
+// .then(setSearchedPodcast(data.getPodcastSeries))
+// console.log(searchedPodcast)
 
 
 
@@ -141,7 +147,7 @@ useEffect(() => {
 return (
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-    <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} testFriend={testFriend} likeCounter={likeCounter} setlikeCounter={likeCounter}/>} />
+    <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} testFriend={testFriend} likeCounter={likeCounter} setlikeCounter={likeCounter} data={data} />} />
     <Route path="/podcast/:id"/>
   </Routes>
 );

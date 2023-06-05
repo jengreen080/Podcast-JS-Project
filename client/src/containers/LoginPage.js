@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 
 
 
+
 const LoginPage = ({loggedIn, setLoggedIn, allUsers, setAllUsers, handleLogin, createUser, handleNewUser}) => {
 
   const userElement = allUsers.map((user) => {
@@ -12,17 +13,37 @@ const LoginPage = ({loggedIn, setLoggedIn, allUsers, setAllUsers, handleLogin, c
 
 
   return (
-    <div className='login-container'>
-      <h3>LOGIN PAGE</h3>
-        <select onChange={handleLogin}>
-          {userElement}
-        </select>
-      <form onSubmit={createUser}>
-        <p>Add a new user...</p>
-        <input placeholder='Username' type='text' onChange={handleNewUser}/>
-        <input type='submit' value='Create'/>
-      </form>
-    </div>
+    // <div className='login-image-container'>
+    //   <div className='login-form-container'>
+    //     <h1>Chatter</h1>
+    //       <p>Select User...</p>
+    //       <select onChange={handleLogin}>
+    //         <option></option>
+    //         {userElement}
+    //       </select>
+    //       <p>Add a new user...</p>
+    //       <form onSubmit={createUser}>
+    //         <input placeholder='Username' type='text' onChange={handleNewUser}/>
+    //         <input type='submit' value='Create'/>
+    //       </form>
+    //   </div>
+    // </div>
+    <>
+    <div className='login-image-container'></div>
+    <div className='login-form-container'>
+        <h1 className='login-title'><span className='purple'>C</span>hatt<span className="turquoise" >e</span>r</h1>
+          <p className='login-text'>Select User...</p>
+          <select onChange={handleLogin}>
+            <option></option>
+            {userElement}
+          </select>
+          <p className='login-text'>Add a new user...</p>
+          <form onSubmit={createUser}>
+            <input placeholder='Username' type='text' onChange={handleNewUser}/>
+            <input type='submit' value='Create'/>
+          </form>
+      </div>
+      </>
   );
 }
 
