@@ -3,13 +3,13 @@ import NavBar from '../components/NavBar';
 import FavouritesList from '../components/FavouritesList';
 import TrendingList from '../components/TrendingList';
 import MainFeed from '../components/MainFeed';
-// import Followers from '../components/Followers';
+// import Follows from '../components/Followers';
 
-const HomePage = () => {
+const HomePage = ({displayTop5Podcasts}) => {
   return (
     <div className='home-container'>
       <NavBar/>
-      <TrendingList/>
+      <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
       <MainFeed/>
       <FavouritesList/>
       {/* <Followers/> */}
