@@ -5,14 +5,15 @@ import TrendingList from '../components/TrendingList';
 import MainFeed from '../components/MainFeed';
 import Follows from '../components/Follows';
 
-const HomePage = ({displayTop5Podcasts,loggedIn}) => {
+const HomePage = ({displayTop5Podcasts,loggedIn, testFriend,searchTerm, updateSearchTerm }) => {
   return (
     <div className='home-container'>
-      <NavBar loggedIn={loggedIn}/>
+      <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm}/>
       <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
       <MainFeed />
       <FavouritesList loggedIn={loggedIn}/>
       <Follows loggedIn={loggedIn}/>
+      <button onClick={testFriend}>TEST!</button>
     </div>
   );
 }

@@ -17,7 +17,6 @@ const LoginPage = ({loggedIn, setLoggedIn, allUsers, setAllUsers, handleLogin, c
         <select onChange={handleLogin}>
           {userElement}
         </select>
-      <h2>{loggedIn.username} is now logged in</h2>
       <form onSubmit={createUser}>
         <p>Add a new user...</p>
         <input placeholder='Username' type='text' onChange={handleNewUser}/>
