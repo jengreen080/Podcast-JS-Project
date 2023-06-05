@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+
 const Follows = ({loggedIn}) => {
   return (
     <div className='follows-container'>

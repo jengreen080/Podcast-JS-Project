@@ -10,6 +10,7 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import { useState, useEffect } from 'react';
 import { getUsers, addUser } from './services/PodcastUsersServices'
+import Follows from './components/Follows';
 
 
 const Get_Top_5_Podcasts = gql`
@@ -23,7 +24,7 @@ const Get_Top_5_Podcasts = gql`
   }   
 `;
 
-let top5pods = ""
+
 
 const DisplayTop5Podcasts = () => {
   const { loading, error, data } = useQuery(Get_Top_5_Podcasts);
@@ -53,11 +54,14 @@ const handleLogin = (event) => {
   const userId = event.target.value
   const userToLogin = allUsers.find(user => userId == user._id)
   setLoggedIn(userToLogin)
+
   navigate("/");
+
 
 }
 
 const [allUsers, setAllUsers] = useState([])
+
 
 
 
@@ -99,7 +103,3 @@ useEffect(() => {
 }
 
 export default App;
-// monday to do : FavPodcastService
-
-
-

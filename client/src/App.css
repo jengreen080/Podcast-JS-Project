@@ -125,3 +125,17 @@
 .login-container {
   padding: 10vh 17.5vw;
 }
+
+.follows-container{
+  position: fixed;
+  /* background-color: lightblue; */
+  padding: 10vh 0;
+  /* zhu : this css container need to be changed  */
+  /* should be flex with fav-container */
+  margin-top: 300px;
+  width: 15vw;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+}
