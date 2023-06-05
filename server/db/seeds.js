@@ -1,24 +1,24 @@
 use podcast;
 // db.dropDatabase();
 
-// db.users.insertMany([
-//   {
-//     username: "ben15",
-//     friends: [],
-//     wishlist: []
-//   }, 
-//   {
-//     username: "zhu41",
-//     friends: [],
-//     wishlist: []
-//   }, 
-//   {
-//     username: "andrew22",
-//     friends: [],
-//     wishlist: []
-//   }
+db.users.insertMany([
+  {
+    username: "ben15",
+    friends: [],
+    wishlist: []
+  }, 
+  {
+    username: "zhu41",
+    friends: [],
+    wishlist: []
+  }, 
+  {
+    username: "andrew22",
+    friends: [],
+    wishlist: []
+  }
 
-// ])
+])
 
 
 db.podcast_reviews.insertMany([

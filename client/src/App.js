@@ -30,18 +30,11 @@ const DisplayTop5Podcasts = () => {
   if (loading) return <p>Loading.....</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  // logging in console to see what data we are getting back from api
-  console.log(data)
-  console.log(data.getMultiplePodcastSeries)
-
-  // below - tried to make it a variable but I can't use it outside
-  top5pods = data.getMultiplePodcastSeries
-
-  // We need to pass this down to the homepage to be used where we want rather than it just displaying
-  // wherever like it is now
   return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
     <li key={uuid}>
       <h3>{name}</h3>
+      <img src={imageUrl} alt={name} style={{ width: '50px', height: 'auto' }} ></img>
+      {/* <p>{description}</p> */}
     </li>
   ))
 }
@@ -96,19 +89,37 @@ useEffect(() => {
   })
 }, [])
 
+
+
+//zhu changed2: 
+// seperate login
   return (
     <Router>
-      <NavBar/>
-      <TrendingList DisplayTop5Podcasts={DisplayTop5Podcasts} top5pods={top5pods}/>
-      <FavouritesList />
-      <Routes>
-        <Route path='/login' element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser}/>}/>
-        <Route path='/' element={<HomePage/>} />
-        <Route path='/podcast/:id'/>
-        <Route path='test' element={<DisplayTop5Podcasts/>} />
-      </Routes>
-    </Router>
-  );
+    <Routes>
+      <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
+      <Route
+        path="/"
+        element={
+          <>
+            <NavBar />
+            <TrendingList displayTop5Podcasts={<DisplayTop5Podcasts />} />
+            <FavouritesList />
+            <HomePage />
+          </>
+        }
+      />
+      <Route path="/podcast/:id"/>
+{/* zhu notes: for filtering podcasts from nav bar:  */}
+{/* optional: podcasts */}
+{/* <Route path="/podcasts" element={<PodcastsPage/>} /> */}
+{/* add to fav, post, rating button*/}
+    </Routes>
+  </Router>
+);
 }
 
 export default App;
+// monday to do : FavPodcastService
+
+
+
