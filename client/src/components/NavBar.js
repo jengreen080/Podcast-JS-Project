@@ -8,7 +8,7 @@ const NavBar = ({loggedIn, searchTerm, updateSearchTerm, selectedPodcast}) => {
 
   return (
     <div className='nav-bar'>
-      <h1 className='nav-title'>App Title</h1>
+      <h1 className='nav-title'><span className='purple'>C</span>hatt<span className='turquoise'>e</span>r</h1>
 
       <form className='nav-form' onSubmit={(event) => {
         event.preventDefault()
