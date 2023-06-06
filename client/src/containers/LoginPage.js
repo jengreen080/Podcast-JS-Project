@@ -33,14 +33,14 @@ const LoginPage = ({loggedIn, setLoggedIn, allUsers, setAllUsers, handleLogin, c
     <div className='login-form-container'>
         <h1 className='login-title'><span className='purple'>C</span>hatt<span className="turquoise" >e</span>r</h1>
           <p className='login-text'>Select User...</p>
-          <select onChange={handleLogin}>
+          <select className='login-form-item' onChange={handleLogin}>
             <option></option>
             {userElement}
           </select>
           <p className='login-text'>Add a new user...</p>
           <form onSubmit={createUser}>
-            <input placeholder='Username' type='text' onChange={handleNewUser}/>
-            <input type='submit' value='Create'/>
+            <input className='login-form-item' placeholder='Username' type='text' onChange={handleNewUser}/>
+            <input className='login-form-button' type='submit' value='Create'/>
           </form>
       </div>
       </>

@@ -43,6 +43,10 @@
   display: flex;
 }
 
+html {
+  background-color: black;
+}
+
 
 
 /* Nav-CSS */
@@ -51,7 +55,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: lightpink;
+  background-color: white;
   padding: 0 10vw;
   position: fixed;
   left: 0;
@@ -59,10 +63,11 @@
   top: 0;
   z-index: 1;
   height: 10vh;
+  border-bottom: 4px solid purple;
 }
 
 .nav-title {
-  background-color: lightblue;
+  /* background-color: lightblue; */
 }
 
 .nav-form {
@@ -91,7 +96,7 @@
   list-style-type: none;
   width: 20vw;
   justify-content: space-evenly;
-  background-color: lightblue;
+  /* background-color: lightblue; */
 }
 
 /* Home Page CSS */
@@ -101,7 +106,8 @@
   height: 1000vh;
   border-radius: 10px;
   padding-top: 5vh;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  box-shadow: rgba(255, 255, 255, 0.07) 0px 1px 2px, rgba(255, 255, 255, 0.883) 0px 2px 4px, rgb(255, 255, 255) 0px 4px 8px, rgba(255, 252, 252, 0.766) 0px 8px 16px, rgba(254, 253, 253, 0.07) 0px 16px 32px, rgba(255, 255, 255, 0.07) 0px 32px 64px;
+  background-color: black;
 }
 
 /* Trending CSS */
@@ -116,10 +122,10 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-  /* background-color: lightblue; */
+  background-color: black;
   align-items: center;
   justify-content: start;
-
+  color: white;
 }
 
 .trending-title {
@@ -140,20 +146,22 @@
 
 #trending-list-item {
   background-color: white;
+  color: black;
   border-radius: 5px;
   margin-bottom: 1vh;
   width: 100%;
   display: flex;
   align-self: center;
   align-items: center;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  /* box-shadow: rgba(255, 255, 255, 0.556) 0px 1px 2px, rgba(255, 255, 255, 0.559) 0px 2px 4px, rgba(255, 255, 255, 0.07) 0px 4px 8px, rgba(255, 252, 252, 0.07) 0px 8px 16px, rgba(254, 253, 253, 0.07) 0px 16px 32px, rgba(255, 255, 255, 0.07) 0px 32px 64px; */
 }
 
 #trending-list-item:hover {
   cursor: pointer;
   transition: 0.3s;
   /* color: orangered; */
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  /* box-shadow: rgba(255, 255, 255, 0.556) 0px 1px 2px, rgba(255, 255, 255, 0.559) 0px 2px 4px, rgba(255, 255, 255, 0.07) 0px 4px 8px, rgba(255, 252, 252, 0.07) 0px 8px 16px, rgba(254, 253, 253, 0.07) 0px 16px 32px, rgba(255, 255, 255, 0.07) 0px 32px 64px; */
+  box-shadow: rgba(255, 255, 255, 0.332) 0px 14px 20px, rgba(255, 255, 255, 0.335) 0px 10px 10px;
 }
 
 .trending-item-title {
@@ -180,7 +188,8 @@
   right: 0;
   top: 10vh;
   z-index: 0;
-  background-color: lightblue;
+  background-color: black;
+  color: white;
 }
 
 
@@ -191,7 +200,8 @@
   right: 0;
   bottom: 0;
   z-index: 0;
-  background-color: lightpink;
+  background-color: black;
+  color: white;
 }
 
 
@@ -229,16 +239,39 @@
   /* background-color: rgba(0, 0, 0, 0.25); */
   /* border-radius: 10%; */
   /* justify-content: space-evenly; */
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .login-title {
   font-size: 5.5rem;
-  font-family: 'Courier New', Courier, monospace;
+  margin: 7.5vh 0 0 0;
 }
 
 .login-text {
   font-family: 'Courier New', Courier, monospace;
+  /* font-weight: bold; */
+}
+
+.login-form-item {
+  font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+
+.login-form-button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+
+.login-form-button:hover {
+  background-color: purple;
+  color: white;
+  border: none;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .purple {
@@ -255,4 +288,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 5vw;
+  color: white;
 }
