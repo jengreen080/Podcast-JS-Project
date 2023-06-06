@@ -56,12 +56,11 @@ const DisplayTop5Podcasts = () => {
 
 function App() {
 
+  // like button
   const [likeCounter, setLikeCounter] = useState(1)
+  const [likeButtonText, setLikeButtonText] = useState("Like")
   
-  // const likeAPost = (likeCounter) => {
-  //   const increaseCounter = likeCounter + 1
-  //   setLikeCounter(increaseCounter)
-// }
+
 
 // Logins
   const navigate = useNavigate();
@@ -147,7 +146,18 @@ useEffect(() => {
 return (
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-    <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} testFriend={testFriend} likeCounter={likeCounter} setlikeCounter={likeCounter} data={data} />} />
+
+    <Route path="/" element= {<HomePage 
+    displayTop5Podcasts = {DisplayTop5Podcasts} 
+    searchTerm={searchTerm} 
+    updateSearchTerm={updateSearchTerm} 
+    testFriend={testFriend} 
+    likeCounter={likeCounter} 
+    setLikeCounter ={setLikeCounter}
+    likeButtonText ={likeButtonText}
+    setLikeButtonText = {setLikeButtonText} data={data} />} 
+    />
+
     <Route path="/podcast/:id"/>
   </Routes>
 );
