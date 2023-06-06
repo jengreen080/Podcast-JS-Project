@@ -80,18 +80,6 @@ query getUserFavouritePodcasts($userFavourites: [ID]!) {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 function App() {
 
 
