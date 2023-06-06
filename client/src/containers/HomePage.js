@@ -8,7 +8,7 @@ import Follows from '../components/Follows';
 import styled from 'styled-components';
 
 
-const HomePage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, updateSearchTerm, likeCounter, setLikeCounter, selectedPodcast, likeButtonText, setLikeButtonText, userFavourites, DisplayUserFavouritePodcasts}) => {
+const HomePage = ({displayTop5Podcasts,loggedIn, friends, searchTerm, updateSearchTerm, likeCounter, setLikeCounter, selectedPodcast, likeButtonText, setLikeButtonText, userFavourites, DisplayUserFavouritePodcasts}) => {
   return (
     <div className='home-container'>
       <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} selectedPodcast={selectedPodcast}/>
@@ -20,7 +20,7 @@ const HomePage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, updateS
       setLikeButtonText = {setLikeButtonText}
       />
       <FavouritesList loggedIn={loggedIn} userFavourites={userFavourites} DisplayUserFavouritePodcasts={DisplayUserFavouritePodcasts}/>
-      <Follows loggedIn={loggedIn}/>
+      <Follows loggedIn={loggedIn} friends={friends}/>
 
       
       {/* Below button will need to be added into tile. Commented out whilst I work on Podcast Information  */}

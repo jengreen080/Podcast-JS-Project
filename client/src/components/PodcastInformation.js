@@ -23,7 +23,9 @@ const PodcastInformation = ({selectedPodcast}) => {
           <option>1</option>
         </select>
         <label for='podcast-review-input'>Leave a comment:</label>
-        <input name='podcast-review-input'></input>
+        {/* <input name='podcast-review-input'></input> */}
+        <textarea rows="4" cols="50" name="comment" form="review-form">
+        Enter text here...</textarea>
       </form>
     </div>
   );

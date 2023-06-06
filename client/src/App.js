@@ -6,8 +6,8 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import PodcastPage from './containers/PodcastPage';
 import { useState, useEffect } from 'react';
-import { getUsers, addUser, getUser, updateUser } from './services/PodcastUsersServices'
-import Follows from './components/Follows';
+import { getUsers, addUser, getUser, updateUser, getFriends } from './services/PodcastUsersServices'
+
 
 // Queries
 const GET_PODCAST_BY_INPUT = gql`
@@ -123,40 +123,49 @@ function App() {
     navigate("/");
 }
 
+// show friends
+const [friends, setFriends] = useState([]);
+useEffect(() => {
+  getFriends(loggedIn._id)
+    .then((friends) => {
+      setFriends(friends);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, [loggedIn._id]);
 
 
 //Add friends
-const addfriend=(friendName)=>{
-  const copyLoggedInUser = {... loggedIn}
-  const copyOfFriends = [... copyLoggedInUser.friends]
-  copyOfFriends.push(friendName);
-  copyLoggedInUser.friends = copyOfFriends
-  setLoggedIn(copyLoggedInUser)
+// const addfriend=(friendName)=>{
+//   const copyLoggedInUser = {... loggedIn}
+//   const copyOfFriends = [... copyLoggedInUser.friends]
+//   copyOfFriends.push(friendName);
+//   copyLoggedInUser.friends = copyOfFriends
+//   setLoggedIn(copyLoggedInUser)
   
-  }
+//   }
 
-  const testFriend = () =>{
-  getUser('647ca89145b1cc39369ba6d2')
-    .then(friend => {
-      addfriend(friend.username)})
+//   const testFriend = () =>{
+//   getUser('647ca89145b1cc39369ba6d2')
+//     .then(friend => {
+//       addfriend(friend.username)})
   
-}
+// }
 
 
 
 const { loading, error, data } = useQuery(GET_PODCAST_BY_INPUT, {
   variables: { searchTerm },
 }, [selectedPodcast]);
+console.log("data is:", data)
 // setSelectedPodcast(data)
 useEffect( () => {
   setSelectedPodcast(data)
 }, [data])
 
 
-// We need the above to return a promise that changes searched podcast to the one returned in the data. We can then refer to this in the podcast component
-// const [searchedPodcast, setSearchedPodcast] = useState({})
-// .then(setSearchedPodcast(data.getPodcastSeries))
-// console.log(searchedPodcast)
+
 
 
 
@@ -195,12 +204,12 @@ return (
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
     <Route path="/" element= {<HomePage 
+    friends={friends}
     displayTop5Podcasts = {DisplayTop5Podcasts} 
     userFavourites={userFavourites}
     DisplayUserFavouritePodcasts={DisplayUserFavouritePodcasts}
     searchTerm={searchTerm} 
     updateSearchTerm={updateSearchTerm} 
-    testFriend={testFriend} 
     likeCounter={likeCounter} 
     setLikeCounter ={setLikeCounter}
     likeButtonText ={likeButtonText}
@@ -213,7 +222,6 @@ return (
     displayTop5Podcasts = {DisplayTop5Podcasts} 
     searchTerm={searchTerm} 
     updateSearchTerm={updateSearchTerm} 
-    testFriend={testFriend} 
     likeCounter={likeCounter} 
     setLikeCounter ={setLikeCounter}
     likeButtonText ={likeButtonText}

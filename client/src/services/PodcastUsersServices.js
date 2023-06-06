@@ -36,23 +36,7 @@ export const updateUser = (payload, id) => {
   .then(res => res.json())
 }
 
-
-//get follows??
-  // export const getFollows = (id) => {
-  //   return fetch(baseURL + id+ follows)
-  //     .then(res => res.json())
-  //     .then(user => {
-  //       const friendIds = user.friends.map(friendId => friendId.replace('ObjectId(', '').replace(')', ''));
-  //       const friendPromises = friendIds.map(friendId => getUsersById(friendId)); // Recursive call to getUsersById
-  
-  //       return Promise.all(friendPromises)
-  //         .then(friends => {
-  //           const friendNames = friends.map(friend => friend.username);
-  //           return { ...user, friends: friendNames };
-  //         });
-  //     })
-  //     .catch(error => {
-  //       console.error('Error retrieving user:', error);
-  //     });
-  // }
-  
+export const getFriends = (id) => {
+  return fetch(baseURL + id + '/friends')
+    .then((res) => res.json());
+}

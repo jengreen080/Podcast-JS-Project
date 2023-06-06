@@ -70,11 +70,29 @@ const createRouter = function (collection) {
             });
     });
 
-    router.get('/id/follows', (req,res)=>{
-        const id= req.params.id;
-        collection.findOne
-    }
-    )
+    router.get('/:id/friends', (req, res) => {
+        const id = req.params.id;
+        collection
+          .findOne({ _id: ObjectID(id) })
+          .then((doc) => {
+            const friendIds = doc.friends.map((friendId) => ObjectID(friendId));
+            collection
+              .find({ _id: { $in: friendIds } })
+              .toArray()
+              .then((friends) => {
+                res.json(friends);
+              })
+              .catch((err) => {
+                console.error(err);
+                res.status(500).json({ error: err });
+              });
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: err });
+          });
+      });
+
 
 
 
