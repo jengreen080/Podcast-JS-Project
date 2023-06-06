@@ -29,7 +29,7 @@ const NavBar = ({loggedIn, searchTerm, updateSearchTerm, selectedPodcast}) => {
       <ul className='nav-link-container'>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/login'>Login</Link></li>
-        <li>Welcome Back: {loggedIn}</li>
+        <li>Welcome Back: {loggedIn.username}</li>
       </ul>
     </div>
   );

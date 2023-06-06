@@ -10,8 +10,8 @@ import styled from 'styled-components'
 const TileComponent = ({loggedIn, likeCounter, setLikeCounter, likeButtonText, setLikeButtonText}) => {
   return (
     <div>
-      <PodcastImage/>
       <TileContent loggedIn = {loggedIn} />
+      <PodcastImage/>
       <AddToFavourites/>
       <LikeButton 
       likeCounter={likeCounter} 

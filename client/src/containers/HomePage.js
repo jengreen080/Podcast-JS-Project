@@ -6,14 +6,19 @@ import MainFeed from '../components/MainFeed';
 import PodcastInformation from '../components/PodcastInformation';
 import Follows from '../components/Follows';
 import styled from 'styled-components';
+import TileComponent from '../components/TileComponent';
 
 
-const HomePage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, updateSearchTerm, likeCounter, setLikeCounter, selectedPodcast, likeButtonText, setLikeButtonText}) => {
+
+const HomePage = ({displayTop5Podcasts,loggedIn,friends,searchTerm, updateSearchTerm, likeCounter, setLikeCounter, selectedPodcast, data, likeButtonText, setLikeButtonText}) => {
+
   return (
     <div className='home-container'>
       <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} selectedPodcast={selectedPodcast}/>
       <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
-      {/* {searchTerm && data ? <PodcastInformation data={data} /> : <MainFeed 
+
+      {searchTerm && data ? <PodcastInformation data={data} /> : <MainFeed 
+
       likeCounter={likeCounter} 
       setLikeCounter={setLikeCounter}
       likeButtonText ={likeButtonText}
@@ -26,11 +31,8 @@ const HomePage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, updateS
       setLikeButtonText = {setLikeButtonText}
       />
       <FavouritesList loggedIn={loggedIn}/>
-      <Follows loggedIn={loggedIn}/>
-
-      
-      {/* Below button will need to be added into tile. Commented out whilst I work on Podcast Information  */}
-      {/* <button onClick={testFriend}>TEST!</button> */}
+      <Follows loggedIn={loggedIn}  friends={friends}/>
+      <TileComponent loggedIn={loggedIn} likeCounter={likeCounter} setLikeCounter={setLikeCounter} likeButtonText={likeButtonText} setLikeButtonText={setLikeButtonText}/>
     </div>
   );
 }
