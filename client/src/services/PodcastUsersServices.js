@@ -5,8 +5,6 @@ export const getUser=(id)=>{
   .then (res=>res.json())
 }
 
-
-
 export const getUsers = () => {
     return fetch(baseURL)
         .then(res => res.json())
@@ -34,9 +32,11 @@ export const updateUser = (payload, id) => {
         headers: { 'Content-Type': 'application/json' }
   })
   .then(res => res.json())
-}
+  }
+
 
 export const getFriends = (id) => {
   return fetch(baseURL + id + '/friends')
     .then((res) => res.json());
 }
+
