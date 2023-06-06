@@ -1,13 +1,10 @@
 import './App.css';
 import { useNavigate } from "react-router-dom";
 import { useQuery, gql } from '@apollo/client';
-import {Routes, Route} from "react-router-dom"
-import NavBar from './components/NavBar';
-import FavouritesList from './components/FavouritesList';
-import MainFeed from './components/MainFeed';
-import TrendingList from './components/TrendingList';
+import {Routes, Route, Link} from "react-router-dom"
 import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
+import PodcastPage from './containers/PodcastPage';
 import { useState, useEffect } from 'react';
 import { getUsers, addUser, getUser, updateUser,getFriends } from './services/PodcastUsersServices'
 import Follows from './components/Follows';
@@ -45,7 +42,7 @@ const DisplayTop5Podcasts = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
-    <li key={uuid} id='trending-list-item'>
+    <li key={uuid} id='trending-list-item' >
       <img src={imageUrl} alt={name} className='trending-item-image'></img>
       <h3 className='trending-item-title'>{name}</h3>
     </li>
@@ -56,17 +53,28 @@ const DisplayTop5Podcasts = () => {
 
 function App() {
 
-  // like button
+
+  // States
+
+  const [loggedIn, setLoggedIn] = useState({})
   const [likeCounter, setLikeCounter] = useState(1)
   const [likeButtonText, setLikeButtonText] = useState("Like")
+  const [allUsers, setAllUsers] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
+  const [newUser, setNewUser] = useState({})
+
+  const [selectedPodcast, setSelectedPodcast] = useState({})
+  
   
 
 
 
 // Logins
   const navigate = useNavigate();
+
   // const [friends, setFriends] = useState([]);
   const [loggedIn, setLoggedIn] = useState({})
+
   const handleLogin = (event) => {
     event.preventDefault()
     const userId = event.target.value
@@ -74,6 +82,7 @@ function App() {
     setLoggedIn(userToLogin)
     navigate("/");
 }
+
 
 // show friends
 const [friends, setFriends] = useState([]);
@@ -110,14 +119,22 @@ const [searchTerm, setSearchTerm] = useState("")
 const { loading, error, data } = useQuery(GET_PODCAST_BY_INPUT, {
   variables: { searchTerm },
 }, [searchTerm]);
-// console.log(data)
+}, [selectedPodcast]);
+console.log(data)
+// setSelectedPodcast(data)
+useEffect( () => {
+  setSelectedPodcast(data)
+}, [data])
+
 
 
 
 
 
 // New User
+
 const [newUser, setNewUser] = useState({})
+
 
 const handleNewUser = (event) => {
   const nameofUser = event.target.value
@@ -165,10 +182,19 @@ return (
     likeCounter={likeCounter} 
     setLikeCounter ={setLikeCounter}
     likeButtonText ={likeButtonText}
-    setLikeButtonText = {setLikeButtonText} data={data} />} 
+    setLikeButtonText = {setLikeButtonText}
+    selectedPodcast={selectedPodcast} />} 
     />
-
-    <Route path="/podcast/:id"/>
+    <Route path="/podcast/:id" element= {<PodcastPage 
+    displayTop5Podcasts = {DisplayTop5Podcasts} 
+    searchTerm={searchTerm} 
+    updateSearchTerm={updateSearchTerm} 
+    testFriend={testFriend} 
+    likeCounter={likeCounter} 
+    setLikeCounter ={setLikeCounter}
+    likeButtonText ={likeButtonText}
+    setLikeButtonText = {setLikeButtonText} selectedPodcast={selectedPodcast} />} 
+    />
   </Routes>
 );
     

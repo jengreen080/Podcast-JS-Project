@@ -5,14 +5,12 @@ const StyledImage = styled.img`
 width: 50%;
 `
 
-
-// THIS WORKS! BUT - it needs to be run as a promise. When there is no data, it crashes
-const PodcastInformation = ({data}) => {
+const PodcastInformation = ({selectedPodcast}) => {
   return (
     <div className='podcast-information-container'>
-      <StyledImage src={data.getPodcastSeries.imageUrl}/>
-      <h3>{data.getPodcastSeries.name}</h3>
-      <p>{data.getPodcastSeries.description}</p>
+      <StyledImage src={selectedPodcast.getPodcastSeries.imageUrl}/>
+      <h3>{selectedPodcast.getPodcastSeries.name}</h3>
+      <p>{selectedPodcast.getPodcastSeries.description}</p>
       <button>Add To Favourites</button>
       <form>
         <label for='podcast-review-select'>Rate: </label>
