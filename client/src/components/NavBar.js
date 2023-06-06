@@ -11,14 +11,18 @@ const NavBar = ({loggedIn, searchTerm, updateSearchTerm}) => {
         console.log({searchTerm})
         updateSearchTerm(event)
         }}>
-        <input type='text' placeholder='Search Podcasts...' id="searchTerm"/>
-        <button type='submit'>Q</button>
+        <input className='nav-searchbar' type='text' placeholder='Search Podcasts...' id="searchTerm"/>
+        <button id="nav-button" type='submit'>Search</button>
+        
+        {/* Below button needs an onlick that changes the display back to your feed */}
+        <button id="nav-button">Clear</button>
       </form>
+      
 
       <ul className='nav-link-container'>
-        <li><Link to='/'>Link 1 (home)</Link></li>
-        <li><Link to='/login'>Link 2 (login)</Link></li>
-        {/* <li>Welcome Back: {loggedIn.username}</li> */}
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/login'>Login</Link></li>
+        <li>Welcome Back: {loggedIn}</li>
       </ul>
     </div>
   );

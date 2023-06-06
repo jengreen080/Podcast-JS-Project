@@ -37,27 +37,58 @@
   }
 }
 
+/* General CSS */
+
+.favourites-follows-container {
+  display: flex;
+}
+
+html {
+  background-color: black;
+}
+
+
+
 /* Nav-CSS */
 
 .nav-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: lightpink;
+  background-color: white;
   padding: 0 10vw;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   z-index: 1;
+  height: 10vh;
+  border-bottom: 4px solid purple;
 }
 
 .nav-title {
-  background-color: lightblue;
+  /* background-color: lightblue; */
 }
 
 .nav-form {
-  background-color: lightblue;
+  /* background-color: lightblue; */
+  display: flex;
+  align-items: center;
+}
+
+.nav-searchbar {
+  height: 4vh;
+  width: 20vw;
+}
+
+#nav-button {
+  height: 4.75vh;
+  margin-left: 0.25vw;
+}
+
+#nav-button:hover {
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .nav-link-container {
@@ -65,29 +96,86 @@
   list-style-type: none;
   width: 20vw;
   justify-content: space-evenly;
-  background-color: lightblue;
+  /* background-color: lightblue; */
 }
 
 /* Home Page CSS */
 
 .home-container {
-  margin: 12.5vh 18vw;
+  margin: 12.5vh 22.5vw;
   height: 1000vh;
   border-radius: 10px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  padding-top: 5vh;
+  box-shadow: rgba(255, 255, 255, 0.07) 0px 1px 2px, rgba(255, 255, 255, 0.883) 0px 2px 4px, rgb(255, 255, 255) 0px 4px 8px, rgba(255, 252, 252, 0.766) 0px 8px 16px, rgba(254, 253, 253, 0.07) 0px 16px 32px, rgba(255, 255, 255, 0.07) 0px 32px 64px;
+  background-color: black;
 }
 
 /* Trending CSS */
 
 .trending-container {
   position: fixed;
-  /* background-color: lightblue; */
-  padding: 10vh 0;
-  width: 15vw;
+  width: 20vw;
   left: 0;
-  top: 0;
+  top: 10vh;
   bottom: 0;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background-color: black;
+  align-items: center;
+  justify-content: start;
+  color: white;
+}
+
+.trending-title {
+  text-align: center;
+}
+
+.trending-list-container {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  /* background-color: pink; */
+  height: 100%;
+  margin: auto;
+  padding-right: 1vw;
+}
+
+#trending-list-item {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  margin-bottom: 1vh;
+  width: 100%;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  /* box-shadow: rgba(255, 255, 255, 0.556) 0px 1px 2px, rgba(255, 255, 255, 0.559) 0px 2px 4px, rgba(255, 255, 255, 0.07) 0px 4px 8px, rgba(255, 252, 252, 0.07) 0px 8px 16px, rgba(254, 253, 253, 0.07) 0px 16px 32px, rgba(255, 255, 255, 0.07) 0px 32px 64px; */
+}
+
+#trending-list-item:hover {
+  cursor: pointer;
+  transition: 0.3s;
+  /* color: orangered; */
+  /* box-shadow: rgba(255, 255, 255, 0.556) 0px 1px 2px, rgba(255, 255, 255, 0.559) 0px 2px 4px, rgba(255, 255, 255, 0.07) 0px 4px 8px, rgba(255, 252, 252, 0.07) 0px 8px 16px, rgba(254, 253, 253, 0.07) 0px 16px 32px, rgba(255, 255, 255, 0.07) 0px 32px 64px; */
+  box-shadow: rgba(255, 255, 255, 0.332) 0px 14px 20px, rgba(255, 255, 255, 0.335) 0px 10px 10px;
+}
+
+.trending-item-title {
+  font-size: 1rem;
+  margin: auto;
+  text-align: center;
+  /* background-color: lightblue; */
+}
+
+.trending-item-image {
+  width: 50%;
+  height: 100%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 
@@ -95,47 +183,111 @@
 
 .favourites-container {
   position: fixed;
-  /* background-color: lightblue; */
-  padding: 10vh 0;
-  width: 15vw;
+  width: 20vw;
+  height: 45%;
   right: 0;
-  top: 0;
-  bottom: 0;
+  top: 10vh;
   z-index: 0;
+  background-color: black;
+  color: white;
 }
 
 
 .follows-container{
   position: fixed;
-  /* background-color: lightblue; */
-  padding: 10vh 0;
-  /* zhu : this css container need to be changed  */
-  /* should be flex with fav-container */
-  margin-top: 300px;
-  width: 15vw;
+  width: 20vw;
+  height: 45%;
   right: 0;
-  top: 0;
   bottom: 0;
   z-index: 0;
+  background-color: black;
+  color: white;
 }
 
 
 /* Login Page CSS */
 
-.login-container {
-  padding: 10vh 17.5vw;
+.login-image-container {
+  /* padding: 7.5vh 35.5vw; */
+  /* background-image: url("https://cdn.shopify.com/s/files/1/0070/7032/files/how_to_start_a_podcast.png?format=jpg&quality=90&v=1679063355"); */
+  /* background-image: url("https://images.pexels.com/photos/708440/pexels-photo-708440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"); */
+  background-image: url("https://images.pexels.com/photos/3756766/pexels-photo-3756766.jpeg");
+  /* background-image: url("https://images.pexels.com/photos/697244/pexels-photo-697244.jpeg"); */
+  background-size: 50vw;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 50%;
+  /* display: flex;
+  align-items: center; */
 }
 
-.follows-container{
+.login-form-container {
+  background-color: rgb(10, 2, 13);
+  color: white;
+  width: 50vw;
+  /* height: 40vh; */
+  padding: 20vh 0;
   position: fixed;
-  /* background-color: lightblue; */
-  padding: 10vh 0;
-  /* zhu : this css container need to be changed  */
-  /* should be flex with fav-container */
-  margin-top: 300px;
-  width: 15vw;
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: rgba(0, 0, 0, 0.25); */
+  /* border-radius: 10%; */
+  /* justify-content: space-evenly; */
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.login-title {
+  font-size: 5.5rem;
+  margin: 7.5vh 0 0 0;
+}
+
+.login-text {
+  font-family: 'Courier New', Courier, monospace;
+  /* font-weight: bold; */
+}
+
+.login-form-item {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+
+.login-form-button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+
+.login-form-button:hover {
+  background-color: purple;
+  color: white;
+  border: none;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.purple {
+  color: purple;
+}
+
+.turquoise {
+  color: rgb(50, 185, 172);
+}
+
+/* Podcast Page */
+
+.podcast-information-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5vw;
+  color: white;
 }
