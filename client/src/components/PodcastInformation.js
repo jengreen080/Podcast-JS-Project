@@ -6,6 +6,7 @@ width: 50%;
 `
 
 const PodcastInformation = ({selectedPodcast}) => {
+  
   return (
     <div className='podcast-information-container'>
       <StyledImage src={selectedPodcast.getPodcastSeries.imageUrl}/>
