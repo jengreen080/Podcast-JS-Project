@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
+
 const NavBar = ({loggedIn, searchTerm, updateSearchTerm}) => {
   return (
     <div className='nav-bar'>
@@ -15,7 +16,9 @@ const NavBar = ({loggedIn, searchTerm, updateSearchTerm}) => {
         <button id="nav-button" type='submit'>Search</button>
         
         {/* Below button needs an onlick that changes the display back to your feed */}
-        <button id="nav-button">Clear</button>
+        <button id="nav-button" onClick={() => {
+          searchTerm = null;
+        }}>Clear</button>
       </form>
       
 

@@ -5,8 +5,6 @@ const StyledImage = styled.img`
 width: 50%;
 `
 
-
-// THIS WORKS! BUT - it needs to be run as a promise. When there is no data, it crashes
 const PodcastInformation = ({data}) => {
   return (
     <div className='podcast-information-container'>

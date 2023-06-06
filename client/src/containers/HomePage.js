@@ -13,7 +13,7 @@ const HomePage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, updateS
     <div className='home-container'>
       <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm}/>
       <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
-      {searchTerm ? <PodcastInformation data={data} /> : <MainFeed 
+      {searchTerm && data ? <PodcastInformation data={data} /> : <MainFeed 
       likeCounter={likeCounter} 
       setLikeCounter={setLikeCounter}
       likeButtonText ={likeButtonText}

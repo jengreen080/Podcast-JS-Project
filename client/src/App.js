@@ -56,15 +56,20 @@ const DisplayTop5Podcasts = () => {
 
 function App() {
 
-  // like button
+
+  // States
+
+  const [loggedIn, setLoggedIn] = useState({})
   const [likeCounter, setLikeCounter] = useState(1)
   const [likeButtonText, setLikeButtonText] = useState("Like")
+  const [allUsers, setAllUsers] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
+  const [newUser, setNewUser] = useState({})
   
 
 
 // Logins
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState({})
 
   const handleLogin = (event) => {
     event.preventDefault()
@@ -74,8 +79,7 @@ function App() {
     navigate("/");
 }
 
-const [allUsers, setAllUsers] = useState([])
-const [searchTerm, setSearchTerm] = useState("")
+
 
 //Add friends
 const addfriend=(friendName)=>{
@@ -97,7 +101,6 @@ const addfriend=(friendName)=>{
 
 
 
-
 const { loading, error, data } = useQuery(GET_PODCAST_BY_INPUT, {
   variables: { searchTerm },
 }, [searchTerm]);
@@ -111,8 +114,6 @@ console.log(data)
 
 
 // New User
-const [newUser, setNewUser] = useState({})
-
 
 const handleNewUser = (event) => {
   const nameofUser = event.target.value
