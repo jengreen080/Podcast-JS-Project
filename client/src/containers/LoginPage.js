@@ -13,21 +13,6 @@ const LoginPage = ({loggedIn, setLoggedIn, allUsers, setAllUsers, handleLogin, c
 
 
   return (
-    // <div className='login-image-container'>
-    //   <div className='login-form-container'>
-    //     <h1>Chatter</h1>
-    //       <p>Select User...</p>
-    //       <select onChange={handleLogin}>
-    //         <option></option>
-    //         {userElement}
-    //       </select>
-    //       <p>Add a new user...</p>
-    //       <form onSubmit={createUser}>
-    //         <input placeholder='Username' type='text' onChange={handleNewUser}/>
-    //         <input type='submit' value='Create'/>
-    //       </form>
-    //   </div>
-    // </div>
     <>
     <div className='login-image-container'></div>
     <div className='login-form-container'>

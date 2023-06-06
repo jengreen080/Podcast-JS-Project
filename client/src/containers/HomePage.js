@@ -8,17 +8,23 @@ import Follows from '../components/Follows';
 import styled from 'styled-components';
 
 
-const HomePage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, updateSearchTerm, likeCounter, setLikeCounter, data, likeButtonText, setLikeButtonText}) => {
+const HomePage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, updateSearchTerm, likeCounter, setLikeCounter, selectedPodcast, likeButtonText, setLikeButtonText}) => {
   return (
     <div className='home-container'>
-      <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm}/>
+      <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} selectedPodcast={selectedPodcast}/>
       <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
-      {searchTerm ? <PodcastInformation data={data} /> : <MainFeed 
+      {/* {searchTerm && data ? <PodcastInformation data={data} /> : <MainFeed 
       likeCounter={likeCounter} 
       setLikeCounter={setLikeCounter}
       likeButtonText ={likeButtonText}
       setLikeButtonText = {setLikeButtonText}
-      />}
+      />} */}
+      <MainFeed 
+      likeCounter={likeCounter} 
+      setLikeCounter={setLikeCounter}
+      likeButtonText ={likeButtonText}
+      setLikeButtonText = {setLikeButtonText}
+      />
       <FavouritesList loggedIn={loggedIn}/>
       <Follows loggedIn={loggedIn}/>
 
