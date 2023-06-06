@@ -9,7 +9,7 @@ import TrendingList from './components/TrendingList';
 import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import { useState, useEffect } from 'react';
-import { getUsers, addUser, getUser, updateUser } from './services/PodcastUsersServices'
+import { getUsers, addUser, getUser, updateUser,getFriends } from './services/PodcastUsersServices'
 import Follows from './components/Follows';
 
 const GET_PODCAST_BY_INPUT = gql`
@@ -62,10 +62,11 @@ function App() {
   
 
 
+
 // Logins
   const navigate = useNavigate();
+  // const [friends, setFriends] = useState([]);
   const [loggedIn, setLoggedIn] = useState({})
-
   const handleLogin = (event) => {
     event.preventDefault()
     const userId = event.target.value
@@ -74,26 +75,34 @@ function App() {
     navigate("/");
 }
 
+// show friends
+const [friends, setFriends] = useState([]);
+
+useEffect(() => {
+  getFriends(loggedIn._id)
+    .then((friends) => {
+      setFriends(friends);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, [loggedIn._id]); 
+
+
+
+
+
+
+
+
+
+
+
+
+
 const [allUsers, setAllUsers] = useState([])
 const [searchTerm, setSearchTerm] = useState("")
 
-//Add friends
-const addfriend=(friendName)=>{
-  const copyLoggedInUser = {... loggedIn}
-  const copyOfFriends = [... copyLoggedInUser.friends]
-  copyOfFriends.push(friendName);
-  copyLoggedInUser.friends = copyOfFriends
-  setLoggedIn(copyLoggedInUser)
-  
-  }
-
-  const testFriend = () =>{
-  getUser('647ca89145b1cc39369ba6d2')
-    .then(friend => {
-      console.log(friend)
-      addfriend(friend.username)})
-  
-}
 
 
 
@@ -101,18 +110,14 @@ const addfriend=(friendName)=>{
 const { loading, error, data } = useQuery(GET_PODCAST_BY_INPUT, {
   variables: { searchTerm },
 }, [searchTerm]);
-console.log(data)
+// console.log(data)
 
-// We need the above to return a promise that changes searched podcast to the one returned in the data. We can then refer to this in the podcast component
-// const [searchedPodcast, setSearchedPodcast] = useState({})
-// .then(setSearchedPodcast(data.getPodcastSeries))
-// console.log(searchedPodcast)
+
 
 
 
 // New User
 const [newUser, setNewUser] = useState({})
-
 
 const handleNewUser = (event) => {
   const nameofUser = event.target.value
@@ -143,15 +148,20 @@ useEffect(() => {
 }, [])
 
 
+
 return (
+
+
+  
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
 
     <Route path="/" element= {<HomePage 
+    friends={friends}
+    loggedIn={loggedIn}
     displayTop5Podcasts = {DisplayTop5Podcasts} 
     searchTerm={searchTerm} 
     updateSearchTerm={updateSearchTerm} 
-    testFriend={testFriend} 
     likeCounter={likeCounter} 
     setLikeCounter ={setLikeCounter}
     likeButtonText ={likeButtonText}
@@ -161,15 +171,20 @@ return (
     <Route path="/podcast/:id"/>
   </Routes>
 );
+    
 }
 export default App;
 
 
-// return (
-//   <Routes>
-//     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-//     <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} loggedIn={loggedIn} testFriend={testFriend}/>} />
-//     <Route path="/podcast/:id"/>
-//   </Routes>
 
-// );
+
+// useEffect(() => {
+//   getFriends(loggedIn._id)
+//     .then((friends) => {
+//       const friendNames = friends.map((friend) => friend.username);
+//       setFriends(friendNames);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// }, [loggedIn._id]); 

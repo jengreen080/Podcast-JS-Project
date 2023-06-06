@@ -1,11 +1,11 @@
 import React from 'react'
 
-const TileContent = ({loggedIn}) => {
+const TileContent = () => {
   return (
     <div>
     {/* below will need linked to the user */}
-        <h3>{loggedIn}</h3>
-        <p>This is the tile content message</p>
+      
+        <p>"I like this podcast, want to share with you guys!"</p>
     </div>
   );
 }

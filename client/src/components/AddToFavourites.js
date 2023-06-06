@@ -2,8 +2,8 @@ import React from 'react'
 
 const AddToFavourites = () => {
   return (
-    <div>
-        <p>This is the add to favourites button</p>
+    <div className='follow-button'>
+       <button>Follow</button>
     </div>
   );
 }
