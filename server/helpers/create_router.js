@@ -92,38 +92,7 @@ const createRouter = function (collection) {
             res.status(500).json({ error: err });
           });
       });
-      
 
-
-
-
-
-    // router.get('/:id/friends', (req, res) => {
-    //     const id = req.params.id;
-    //     collection
-    //       .findOne({ _id: ObjectID(id) })
-    //       .then((doc) => {
-    //         const friendIds = doc.friends.map((friendId) => ObjectID(friendId));
-    //         collection
-    //           .find({ _id: { $in: friendIds } })
-
-    //           .toArray()
-    //           .then((friends) => {
-    //             const friendNames = friends.map((friend) => friend.username);
-    //             res.json(friendNames);
-    //           })
-    //           .catch((err) => {
-    //             console.error(err);
-    //             res.status(500).json({ error: err });
-    //           });
-    //       })
-    //       .catch((err) => {
-    //         console.error(err);
-    //         res.status(500).json({ error: err });
-    //       });
-    //   });
-      
-      
 
 
 

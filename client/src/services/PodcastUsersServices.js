@@ -35,8 +35,8 @@ export const updateUser = (payload, id) => {
   }
 
 
-  export const getFriends = (id) => {
-    return fetch(baseURL + id + '/friends')
-      .then((res) => res.json());
-  }
-  
+export const getFriends = (id) => {
+  return fetch(baseURL + id + '/friends')
+    .then((res) => res.json());
+}
+

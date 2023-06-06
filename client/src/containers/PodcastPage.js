@@ -8,13 +8,13 @@ import Follows from '../components/Follows';
 import styled from 'styled-components';
 
 
-const PodcastPage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, updateSearchTerm, likeCounter, setLikeCounter, selectedPodcast, likeButtonText, setLikeButtonText}) => {
+const PodcastPage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, updateSearchTerm, likeCounter, setLikeCounter, selectedPodcast, likeButtonText, setLikeButtonText, DisplayUserFavouritePodcasts, userFavourites}) => {
   return (
     <div className='home-container'>
       <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm}/>
       <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
       {selectedPodcast ? <PodcastInformation selectedPodcast={selectedPodcast} /> : null}
-      <FavouritesList loggedIn={loggedIn}/>
+      <FavouritesList loggedIn={loggedIn} DisplayUserFavouritePodcasts={DisplayUserFavouritePodcasts} userFavourites={userFavourites}/>
       <Follows loggedIn={loggedIn}/>
     </div>
   );
