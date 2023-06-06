@@ -110,6 +110,12 @@ html {
   background-color: black;
 }
 
+/* Main Feed */
+
+.review-tile {
+  color: white;
+}
+
 /* Trending CSS */
 
 .trending-container {

@@ -12,16 +12,32 @@ border-radius: 10px;
 box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 `
 
-const MainFeed = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonText}) => {
+const MainFeed = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonText, allReviews}) => {
+
+  const reviewElements = allReviews.map((review) => {
+    return (
+      <li className='review-tile' >
+        <h3>{review.username}</h3>
+        <h5>{review.podcast.name}</h5>
+        {/* <img src={review.podcast.imgUrl} /> */}
+      </li>
+    )
+  })
+
   return (
-    <StyledTileComponent>
-      <TileComponent 
-      likeCounter={likeCounter} 
-      setLikeCounter= {setLikeCounter}
-      likeButtonText ={likeButtonText}
-      setLikeButtonText = {setLikeButtonText}
-      />
-    </StyledTileComponent>
+    <div>
+      <ul>
+        {reviewElements}
+      </ul>
+    </div>
+    // <StyledTileComponent>
+    //   <TileComponent 
+    //   likeCounter={likeCounter} 
+    //   setLikeCounter= {setLikeCounter}
+    //   likeButtonText ={likeButtonText}
+    //   setLikeButtonText = {setLikeButtonText}
+    //   />
+    // </StyledTileComponent>
   );
 }
 

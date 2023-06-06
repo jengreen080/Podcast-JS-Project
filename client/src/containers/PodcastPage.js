@@ -13,7 +13,7 @@ const PodcastPage = ({displayTop5Podcasts,loggedIn, testFriend, searchTerm, upda
     <div className='home-container'>
       <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm}/>
       <TrendingList displayTop5Podcasts = {displayTop5Podcasts}/>
-      {selectedPodcast ? <PodcastInformation selectedPodcast={selectedPodcast} /> : null}
+      {selectedPodcast ? <PodcastInformation selectedPodcast={selectedPodcast} loggedIn={loggedIn} /> : null}
       <FavouritesList loggedIn={loggedIn} DisplayUserFavouritePodcasts={DisplayUserFavouritePodcasts} userFavourites={userFavourites}/>
       <Follows loggedIn={loggedIn}/>
     </div>
