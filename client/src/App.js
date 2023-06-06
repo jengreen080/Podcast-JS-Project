@@ -6,7 +6,9 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import PodcastPage from './containers/PodcastPage';
 import { useState, useEffect } from 'react';
-import { getUsers, addUser, getUser, updateUser, getFriends } from './services/PodcastUsersServices'
+import { getUsers, addUser, getUser, updateUser,getFriends } from './services/PodcastUsersServices'
+import Follows from './components/Follows';
+
 
 
 // Queries
@@ -111,8 +113,12 @@ function App() {
   
 
 
+
 // Logins
   const navigate = useNavigate();
+
+  // const [friends, setFriends] = useState([]);
+  const [loggedIn, setLoggedIn] = useState({})
 
   const handleLogin = (event) => {
     event.preventDefault()
@@ -135,28 +141,39 @@ useEffect(() => {
     });
 }, [loggedIn._id]);
 
+// show friends
+const [friends, setFriends] = useState([]);
 
-//Add friends
-// const addfriend=(friendName)=>{
-//   const copyLoggedInUser = {... loggedIn}
-//   const copyOfFriends = [... copyLoggedInUser.friends]
-//   copyOfFriends.push(friendName);
-//   copyLoggedInUser.friends = copyOfFriends
-//   setLoggedIn(copyLoggedInUser)
-  
-//   }
+useEffect(() => {
+  getFriends(loggedIn._id)
+    .then((friends) => {
+      setFriends(friends);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, [loggedIn._id]); 
 
-//   const testFriend = () =>{
-//   getUser('647ca89145b1cc39369ba6d2')
-//     .then(friend => {
-//       addfriend(friend.username)})
-  
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+const [allUsers, setAllUsers] = useState([])
+const [searchTerm, setSearchTerm] = useState("")
 
 
 
 const { loading, error, data } = useQuery(GET_PODCAST_BY_INPUT, {
   variables: { searchTerm },
+}, [searchTerm]);
 }, [selectedPodcast]);
 console.log("data is:", data)
 // setSelectedPodcast(data)
@@ -170,6 +187,9 @@ useEffect( () => {
 
 
 // New User
+
+const [newUser, setNewUser] = useState({})
+
 
 const handleNewUser = (event) => {
   const nameofUser = event.target.value
@@ -200,11 +220,16 @@ useEffect(() => {
 }, [])
 
 
+
 return (
+
+
+  
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
     <Route path="/" element= {<HomePage 
     friends={friends}
+    loggedIn={loggedIn}
     displayTop5Podcasts = {DisplayTop5Podcasts} 
     userFavourites={userFavourites}
     DisplayUserFavouritePodcasts={DisplayUserFavouritePodcasts}
@@ -217,6 +242,7 @@ return (
     selectedPodcast={selectedPodcast} />} 
     />
     <Route path="/podcast/:id" element= {<PodcastPage 
+    loggedIn={loggedIn}
     userFavourites={userFavourites}
     DisplayUserFavouritePodcasts={DisplayUserFavouritePodcasts}
     displayTop5Podcasts = {DisplayTop5Podcasts} 
@@ -229,15 +255,6 @@ return (
     />
   </Routes>
 );
+    
 }
 export default App;
-
-
-// return (
-//   <Routes>
-//     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-//     <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} loggedIn={loggedIn} testFriend={testFriend}/>} />
-//     <Route path="/podcast/:id"/>
-//   </Routes>
-
-// );
