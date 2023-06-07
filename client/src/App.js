@@ -7,6 +7,7 @@ import LoginPage from './containers/LoginPage';
 import PodcastPage from './containers/PodcastPage';
 import { useState, useEffect } from 'react';
 import { getUsers, addUser, getUser, updateUser, getFriends } from './services/PodcastUsersServices'
+import { addReview, getReviews } from './services/PodcastReviewsServices';
 
 
 // Queries
@@ -72,9 +73,9 @@ query getUserFavouritePodcasts($userFavourites: [ID]!) {
     }
 
     return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
-      <li key={uuid} id='trending-list-item' >
-        <img src={imageUrl} alt={name} className='trending-item-image'></img>
-        <h3 className='trending-item-title'>{name}</h3>
+      <li key={uuid} id='fave-list-item' >
+        <img src={imageUrl} alt={name} className='favourite-item-image'></img>
+        {/* <h3 className='favourite-item-title'>{name}</h3> */}
       </li>
     ))
   }
@@ -93,10 +94,28 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const [newUser, setNewUser] = useState({})
   const [selectedPodcast, setSelectedPodcast] = useState({})
-
   const [userFavourites, setUserFavourites] = useState([])
+
+  const [allReviews, setAllReviews] = useState([])
+ 
   
-  
+
+
+  // Reviews
+
+  useEffect(() => {
+    getReviews()
+    .then((reviews) => {
+      setAllReviews(reviews)
+    })
+  }, [])
+
+  const createReview = (newReview) => {
+    addReview(newReview)
+    .then(savedReview => setAllReviews([...allReviews, savedReview]))
+  }
+
+
 
 
 // Logins
@@ -108,6 +127,7 @@ function App() {
     const userToLogin = allUsers.find(user => userId == user._id)
     setLoggedIn(userToLogin)
     setUserFavourites(userToLogin.wishlist)
+    console.log("All Reviews:", allReviews)
     navigate("/");
 }
 
@@ -123,23 +143,6 @@ useEffect(() => {
     });
 }, [loggedIn._id]);
 
-
-//Add friends
-// const addfriend=(friendName)=>{
-//   const copyLoggedInUser = {... loggedIn}
-//   const copyOfFriends = [... copyLoggedInUser.friends]
-//   copyOfFriends.push(friendName);
-//   copyLoggedInUser.friends = copyOfFriends
-//   setLoggedIn(copyLoggedInUser)
-  
-//   }
-
-//   const testFriend = () =>{
-//   getUser('647ca89145b1cc39369ba6d2')
-//     .then(friend => {
-//       addfriend(friend.username)})
-  
-// }
 
 
 
@@ -175,7 +178,6 @@ const createUser = () => {
 
 //update new search
 const updateSearchTerm = (event) =>{
-  console.log("updateSearchTerm v.t.searchTerm.value",event.target.searchTerm.value)
   setSearchTerm(event.target.searchTerm.value)
 }
 
@@ -192,6 +194,7 @@ return (
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
     <Route path="/" element= {<HomePage 
+    allReviews={allReviews}
     friends={friends}
     displayTop5Podcasts = {DisplayTop5Podcasts} 
     userFavourites={userFavourites}
@@ -204,7 +207,9 @@ return (
     setLikeButtonText = {setLikeButtonText}
     selectedPodcast={selectedPodcast} />} 
     />
-    <Route path="/podcast/:id" element= {<PodcastPage 
+    <Route path="/podcast/:id" element= {<PodcastPage
+    createReview={createReview}
+    loggedIn={loggedIn}
     userFavourites={userFavourites}
     DisplayUserFavouritePodcasts={DisplayUserFavouritePodcasts}
     displayTop5Podcasts = {DisplayTop5Podcasts} 

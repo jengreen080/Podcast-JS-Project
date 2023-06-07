@@ -8,7 +8,7 @@ const Follows = ({loggedIn, friends}) => {
     // Handle the case where data is undefined or empty
     return (
       <div className='follows-container'>
-      <h2>Follows</h2>
+      <h2 className='follows-title'>Follows</h2>
       </div>
       )
   }
@@ -21,7 +21,7 @@ const Follows = ({loggedIn, friends}) => {
 </div>);
   return (
     <div className='follows-container'>
-    <h2>Follows</h2>
+    <h2 className='follows-title'>Follows</h2>
     <ul className="follows-list" >{friendsInfo}</ul>
     </div>
   );
