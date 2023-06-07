@@ -1,7 +1,11 @@
 import React from 'react'
 
-const LikeButton = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonText}) => {
+const LikeButton = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonText, review, tileToTouch, setTileToTouch, loggedIn}) => {
     
+    console.log("like button text:", likeButtonText)
+    console.log("User Logged In ID:", loggedIn._id)
+    
+
     // not currently counting correctly
     const toggleButtonStatus = () => {
         if (likeButtonText === "Like") {
@@ -10,70 +14,35 @@ const LikeButton = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonT
         } else {
             setLikeButtonText("Like")
             setLikeCounter(likeCounter - 1)
-        }
-        console.log(likeCounter)
+    
     }
 
     const handleLikeButtonClick = () => {
+        setTileToTouch(review)
+        console.log("Review to touch:", review)
         toggleButtonStatus()
         }
     
-
-    // const likeAPost = () => {
-    //     let increaseCounter = likeCounter + 1
-    //     setLikeCounter(increaseCounter)
-    //     console.log(likeCounter)
-    // }
-
-    // const toggleLike = () =>{
-    //     let likeStatus = "Like"
-    //         if (likeStatus === "Like") {
-    //             likeStatus = "Unlike"
-    //         } else {
-    //             likeStatus = "Like"
-    //         }
-    // }
-    
-    // const increaseLikeCounter = () => {
-    //     let numberOfLikes = (likeCounter +1)
-    //     setLikeCounter(numberOfLikes)
-    //     console.log(likeCounter)
-    //     return `${numberOfLikes} likes`
-    // }
-
-    // const toggleButtonStatus = () => {
-    //     let buttonStatus = "Like"
-    //         if (buttonStatus === "Like") {
-    //             buttonStatus = "Unlike"
-    //         } else {
-    //         if (buttonStatus === "Unlike") {
-    //             buttonStatus = "Like"
-    //         } }
-                
-    //         return buttonStatus
-    //     }
-
-    // const clickTheLikeButton = () => {
-    //     increaseLikeCounter()
-    //     toggleButtonStatus()
-    // }
+        // console.log("Review to touch:", tileToTouch)
+        // if (!tileToTouch) {
+            
+        //     return (
+        //         <>
+        //             <button>test</button>
+        //         </>
+        //     )
+        // }
+            
 
     return (
         <>
-            <button onClick={handleLikeButtonClick}>{likeButtonText}</button>
-            {/* <p>{increaseLikeCounter}</p> */}
+            <button onClick={handleLikeButtonClick}>{
+                tileToTouch.likes.includes(loggedIn._id) ? "Unlike" : "Like"
+            }</button>
         </>
     )
-    // return (
-    //     <div>
-    //         <button id = "likeButton" onClick="toggleLike()">Like</button>
-    //         {/* <button id = "likeButtin" onClick={likeAPost}>Like</button>
 
-    //         <button id = "unlikeButton" onClick={likeAPost}>Unlike</button> */}
-    //         <p>This is the like button</p>
-    //     </div>
-    // );
-}
+}}
 
 
 

@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 
 
 const NavBar = ({loggedIn, searchTerm, updateSearchTerm, selectedPodcast}) => {
 
   const navigate = useNavigate()
+  const [query, setQuery] = useState("")
+
+
+  const handleClear = () => {
+    setQuery("")
+  }
+
+  const handleQueryChange = (event) => {
+    setQuery(event.target.value.toLowerCase())
+  }
 
   return (
     <div className='nav-bar'>
@@ -21,11 +31,9 @@ const NavBar = ({loggedIn, searchTerm, updateSearchTerm, selectedPodcast}) => {
           navigate(`/podcast/${selectedPodcast.getPodcastSeries.uuid}`)
         }
         }}>
-        <input className='nav-searchbar' type='text' placeholder='Search Podcasts...' id="searchTerm"/>
-        <button id="nav-button" type='submit'>Search</button>
-        <button id="nav-button" onClick={() => {
-          navigate('/')
-        }}>Clear</button>
+        <input className='nav-searchbar' type='text' placeholder='Search Podcasts...' onChange={handleQueryChange} value={query} id="searchTerm"/>
+        <button id="searchButton" type='submit'>Search</button>
+        <button id="clearButton" onClick={handleClear}>Clear</button>
       </form>
       
 

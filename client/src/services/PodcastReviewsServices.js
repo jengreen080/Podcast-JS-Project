@@ -21,12 +21,12 @@ export const deleteReview = (id) => {
     })
 }
 
-// export const updateReview = (payload, id) => {
-//   return fetch(baseURL + id, {
-//         method: 'PUT',
-//         body: JSON.stringify(payload),
-//         headers: { 'Content-Type': 'application/json' }
-//   })
-//   .then(res => res.json())
-// }
+export const updateReview = (payload, id) => {
+  return fetch(baseURL + id, {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' }
+  })
+  .then(res => res.json())
+}
 

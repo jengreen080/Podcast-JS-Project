@@ -94,7 +94,25 @@ const createRouter = function (collection) {
       });
 
 
-
+      router.put('/:reviewId', (req, res) => {
+        const reviewId = req.params.reviewId;
+        const comment = {
+            username: req.body.username,
+            text: req.body.text
+          };
+        collection
+            .updateOne(
+            { _id: ObjectID(reviewId) },
+            { $push: { comments: comment } }
+            )
+            .then(() => {
+            res.json({ message: 'Review Added' });
+            })
+            .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: err });
+            });
+        });
 
 
 

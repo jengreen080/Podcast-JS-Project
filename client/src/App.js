@@ -37,7 +37,11 @@ const DisplayTop5Podcasts = () => {
   const { loading, error, data } = useQuery(Get_Top_5_Podcasts);
 
   if (loading) return <p>Loading.....</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (error) return <p>No favourites yet</p>;
+
+  if (!data.getMultiplePodcastSeries) {
+    return <p>Nothing to show</p>
+  }
 
   return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
     <li key={uuid} id='trending-list-item' >
@@ -69,7 +73,7 @@ query getUserFavouritePodcasts($userFavourites: [ID]!) {
    
     if (loading) return <p>Loading.....</p>;
     if (error) {
-      return <p>Error: {error.message}</p>;
+      return <p></p>;
     }
 
     return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
@@ -98,7 +102,8 @@ function App() {
 
   const [allReviews, setAllReviews] = useState([])
  
-  
+  const [tileToTouch, setTileToTouch] = useState(null)
+
 
 
   // Reviews
@@ -193,7 +198,10 @@ useEffect(() => {
 return (
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-    <Route path="/" element= {<HomePage 
+    <Route path="/" element= {<HomePage
+    setAllReviews={setAllReviews}
+    tileToTouch={tileToTouch}
+    setTileToTouch={setTileToTouch} 
     allReviews={allReviews}
     friends={friends}
     displayTop5Podcasts = {DisplayTop5Podcasts} 
@@ -205,7 +213,8 @@ return (
     setLikeCounter ={setLikeCounter}
     likeButtonText ={likeButtonText}
     setLikeButtonText = {setLikeButtonText}
-    selectedPodcast={selectedPodcast} />} 
+    selectedPodcast={selectedPodcast}
+    loggedIn={loggedIn} />} 
     />
     <Route path="/podcast/:id" element= {<PodcastPage
     createReview={createReview}
