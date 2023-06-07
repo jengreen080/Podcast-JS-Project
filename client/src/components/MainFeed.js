@@ -9,11 +9,11 @@ import ReviewItem from './ReviewItem';
 const { Panel } = Collapse;
 
 
-const MainFeed = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonText, allReviews, setAllReviews, tileToTouch, setTileToTouch, loggedIn}) => {
+const MainFeed = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonText, allReviews, setAllReviews, tileToTouch, setTileToTouch,addFriend, loggedIn}) => {
 
     const reviewElements = allReviews.map((review) => {
     return (
-      <ReviewItem loggedIn={loggedIn} review={review} allReviews={allReviews} setAllReviews={setAllReviews}/>
+      <ReviewItem loggedIn={loggedIn} review={review} allReviews={allReviews} setAllReviews={setAllReviews} addFriend={addFriend}/>
     )
   })
 

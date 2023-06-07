@@ -17,7 +17,7 @@ border-radius: 10px;
 box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 `
 
-const ReviewItem = ({loggedIn, review, allReviews, setAllReviews}) => {
+const ReviewItem = ({loggedIn, review, allReviews, setAllReviews, addFriend}) => {
 
   const [commentToAdd, setCommentToAdd] = useState("")
   // const [reviewsToShow, setReviewsToShow] = useState([])
@@ -70,6 +70,7 @@ const ReviewItem = ({loggedIn, review, allReviews, setAllReviews}) => {
     <StyledTileComponent review={review}>
     <li className='review-tile' >
       <h3>{review.username}</h3>
+      <button onClick={()=>addFriend(loggedIn._id,review.username)}>follow</button>
       <h5>{review.podcast.name}</h5>
       <p>{review.text}</p>
       {/* <img src={review.podcast.imgUrl} /> */}
