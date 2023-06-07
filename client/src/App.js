@@ -7,7 +7,7 @@ import LoginPage from './containers/LoginPage';
 import PodcastPage from './containers/PodcastPage';
 import { useState, useEffect } from 'react';
 import { getUsers, addUser, getUser, updateUser, getFriends } from './services/PodcastUsersServices'
-import { getReviews } from './services/PodcastReviewsServices';
+import { addReview, getReviews } from './services/PodcastReviewsServices';
 
 
 // Queries
@@ -73,9 +73,9 @@ query getUserFavouritePodcasts($userFavourites: [ID]!) {
     }
 
     return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
-      <li key={uuid} id='trending-list-item' >
-        <img src={imageUrl} alt={name} className='trending-item-image'></img>
-        <h3 className='trending-item-title'>{name}</h3>
+      <li key={uuid} id='fave-list-item' >
+        <img src={imageUrl} alt={name} className='favourite-item-image'></img>
+        {/* <h3 className='favourite-item-title'>{name}</h3> */}
       </li>
     ))
   }
@@ -97,8 +97,10 @@ function App() {
   const [userFavourites, setUserFavourites] = useState([])
 
   const [allReviews, setAllReviews] = useState([])
-  const [reviewToAdd, setReviewToAdd] = useState({})
+ 
   
+
+
   // Reviews
 
   useEffect(() => {
@@ -107,6 +109,11 @@ function App() {
       setAllReviews(reviews)
     })
   }, [])
+
+  const createReview = (newReview) => {
+    addReview(newReview)
+    .then(savedReview => setAllReviews([...allReviews, savedReview]))
+  }
 
 
 
@@ -136,23 +143,6 @@ useEffect(() => {
     });
 }, [loggedIn._id]);
 
-
-//Add friends
-// const addfriend=(friendName)=>{
-//   const copyLoggedInUser = {... loggedIn}
-//   const copyOfFriends = [... copyLoggedInUser.friends]
-//   copyOfFriends.push(friendName);
-//   copyLoggedInUser.friends = copyOfFriends
-//   setLoggedIn(copyLoggedInUser)
-  
-//   }
-
-//   const testFriend = () =>{
-//   getUser('647ca89145b1cc39369ba6d2')
-//     .then(friend => {
-//       addfriend(friend.username)})
-  
-// }
 
 
 
@@ -188,7 +178,6 @@ const createUser = () => {
 
 //update new search
 const updateSearchTerm = (event) =>{
-  console.log("updateSearchTerm v.t.searchTerm.value",event.target.searchTerm.value)
   setSearchTerm(event.target.searchTerm.value)
 }
 
@@ -219,6 +208,7 @@ return (
     selectedPodcast={selectedPodcast} />} 
     />
     <Route path="/podcast/:id" element= {<PodcastPage
+    createReview={createReview}
     loggedIn={loggedIn}
     userFavourites={userFavourites}
     DisplayUserFavouritePodcasts={DisplayUserFavouritePodcasts}

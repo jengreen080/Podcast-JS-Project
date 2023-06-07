@@ -13,12 +13,14 @@ const FavouritesList = ({ userFavourites, DisplayUserFavouritePodcasts}) => {
   // } 
   console.log("userFavoruites outside of if", userFavourites )
   return (
-    <div className='favourites-container'>
-    <h2>Favourites</h2>
-    <ul>
-      {DisplayUserFavouritePodcasts(userFavourites)}
-    </ul>
-    </div>
+    <>
+      <div className='favourites-container'>
+      <h2 className='favourites-title'>Favourites</h2>
+      <ul className='favourites-ul'>
+        {DisplayUserFavouritePodcasts(userFavourites)}
+      </ul>
+      </div>
+    </>
   );
 }
 

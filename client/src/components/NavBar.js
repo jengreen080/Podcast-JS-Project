@@ -13,6 +13,9 @@ const NavBar = ({loggedIn, searchTerm, updateSearchTerm, selectedPodcast}) => {
       <form className='nav-form' onSubmit={(event) => {
         event.preventDefault()
         console.log({searchTerm})
+        {if (selectedPodcast) {
+          console.log("Name:", selectedPodcast.name)
+        }}
         updateSearchTerm(event)
         if (selectedPodcast && searchTerm) {
           navigate(`/podcast/${selectedPodcast.getPodcastSeries.uuid}`)
@@ -27,9 +30,9 @@ const NavBar = ({loggedIn, searchTerm, updateSearchTerm, selectedPodcast}) => {
       
 
       <ul className='nav-link-container'>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/login'>Log Out</Link></li>
-        <li>Welcome Back: {loggedIn}</li>
+        <Link to='/'><li id='nav-list-item'>Home</li></Link>
+        <Link to='/login'><li id='nav-list-item'>Log out</li></Link>
+        {/* <li>Welcome Back: {loggedIn.name}</li> */}
       </ul>
     </div>
   );

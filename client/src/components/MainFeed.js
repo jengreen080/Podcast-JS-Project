@@ -19,6 +19,7 @@ const MainFeed = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonTex
       <li className='review-tile' >
         <h3>{review.username}</h3>
         <h5>{review.podcast.name}</h5>
+        <p>{review.text}</p>
         {/* <img src={review.podcast.imgUrl} /> */}
       </li>
     )

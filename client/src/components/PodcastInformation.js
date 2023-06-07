@@ -2,17 +2,20 @@ import React from 'react'
 import { useState } from 'react';
 import styled from 'styled-components'
 import { addReview } from '../services/PodcastReviewsServices';
+import { useNavigate } from "react-router-dom";
 
 
 const StyledImage = styled.img`
 width: 50%;
 `
 
-const PodcastInformation = ({selectedPodcast, loggedIn}) => {
+const PodcastInformation = ({selectedPodcast, loggedIn, createReview}) => {
+
+  const navigate = useNavigate();
 
   const [text, setText] = useState('')
   const [rating, setRating] = useState(1)
-  const [comments, setComments] = useState(null)
+  const [comments, setComments] = useState([])
 
   if (!selectedPodcast) {
     return <p>Loading...</p>; 
@@ -46,9 +49,10 @@ const PodcastInformation = ({selectedPodcast, loggedIn}) => {
       likes: 0,
       comments: comments
       }
-      addReview(newReview)
+      createReview(newReview)
       setText('')
       setRating(1)
+      navigate('/')
     }
 
   return (
@@ -69,9 +73,8 @@ const PodcastInformation = ({selectedPodcast, loggedIn}) => {
           <option value='1' >1</option>
         </select>
         <label for='podcast-review-input'>Leave a comment:</label>
-        {/* <input name='podcast-review-input'></input> */}
-        <textarea rows="4" cols="50" name="comment" form="review-form" onChange={handleTextChange}>
-        Enter text here...</textarea>
+        {/* <input type="text" onChange={handleTextChange}></input> */}
+        <textarea rows="4" cols="50" name="comment" form="review-form" placeholder='Enter text here...' onChange={handleTextChange}></textarea>
         <button type='submit'>Submit</button>
       </form>
     </div>
