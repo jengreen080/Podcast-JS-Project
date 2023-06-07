@@ -6,7 +6,7 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import PodcastPage from './containers/PodcastPage';
 import { useState, useEffect } from 'react';
-import { getUsers, addUser, getUser, updateUser, getFriends } from './services/PodcastUsersServices'
+import {updateWishList, getUserId,updateFriends, getUsers, addUser, getUser, updateUser, getFriends} from './services/PodcastUsersServices'
 import { addReview, getReviews } from './services/PodcastReviewsServices';
 
 
@@ -47,6 +47,7 @@ const DisplayTop5Podcasts = () => {
     <li key={uuid} id='trending-list-item' >
       <img src={imageUrl} alt={name} className='trending-item-image'></img>
       <h3 className='trending-item-title'>{name}</h3>
+      {/* <h3>{description}</h3> */}
     </li>
   ))
 }
@@ -62,6 +63,7 @@ query getUserFavouritePodcasts($userFavourites: [ID]!) {
     imageUrl
   }
 }`
+
 
 
 
@@ -82,7 +84,7 @@ query getUserFavouritePodcasts($userFavourites: [ID]!) {
         {/* <h3 className='favourite-item-title'>{name}</h3> */}
       </li>
     ))
-  }
+}
 
 
 function App() {
@@ -99,13 +101,8 @@ function App() {
   const [newUser, setNewUser] = useState({})
   const [selectedPodcast, setSelectedPodcast] = useState({})
   const [userFavourites, setUserFavourites] = useState([])
-
   const [allReviews, setAllReviews] = useState([])
  
-  const [tileToTouch, setTileToTouch] = useState(null)
-
-
-
   // Reviews
 
   useEffect(() => {
@@ -136,17 +133,53 @@ function App() {
     navigate("/");
 }
 
+
+
+
+
+
+
+
 // show friends
 const [friends, setFriends] = useState([]);
 useEffect(() => {
   getFriends(loggedIn._id)
     .then((friends) => {
       setFriends(friends);
+      console.log("show me my friends", friends)
     })
     .catch((error) => {
       console.error(error);
     });
 }, [loggedIn._id]);
+
+
+  //addfriend
+  
+  const addFriend=(currentUserId,friendUsername)=>{
+    console.log("addFried has ran:", currentUserId, friendUsername)
+    getUserId(friendUsername)
+      .then(friendIdObj => {
+        console.log(friendIdObj)
+        updateFriends(currentUserId,friendIdObj._id)
+        .then(() => getFriends(currentUserId))
+        .then( (friendsFromDb) => setFriends(friendsFromDb))
+        .catch(err => console.log("addFriend function failed:", err))
+      });
+    
+  }
+
+//add wishlist 
+//const [userFavourites, setUserFavourites] = useState([])
+const addPodToWishlist=(currentUserId,podToSaveId)=>{
+  updateWishList(currentUserId,podToSaveId)
+}
+
+
+
+
+
+
 
 
 
@@ -200,8 +233,8 @@ return (
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
     <Route path="/" element= {<HomePage
     setAllReviews={setAllReviews}
-    tileToTouch={tileToTouch}
-    setTileToTouch={setTileToTouch} 
+    loggedIn={loggedIn}
+    addFriend={addFriend}
     allReviews={allReviews}
     friends={friends}
     displayTop5Podcasts = {DisplayTop5Podcasts} 
@@ -213,10 +246,10 @@ return (
     setLikeCounter ={setLikeCounter}
     likeButtonText ={likeButtonText}
     setLikeButtonText = {setLikeButtonText}
-    selectedPodcast={selectedPodcast}
-    loggedIn={loggedIn} />} 
+    selectedPodcast={selectedPodcast}/>} 
     />
     <Route path="/podcast/:id" element= {<PodcastPage
+    addPodToWishlist={addPodToWishlist}
     createReview={createReview}
     loggedIn={loggedIn}
     userFavourites={userFavourites}
@@ -235,11 +268,3 @@ return (
 export default App;
 
 
-// return (
-//   <Routes>
-//     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-//     <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} loggedIn={loggedIn} testFriend={testFriend}/>} />
-//     <Route path="/podcast/:id"/>
-//   </Routes>
-
-// );

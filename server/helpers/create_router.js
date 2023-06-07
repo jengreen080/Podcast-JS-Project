@@ -117,9 +117,62 @@ const createRouter = function (collection) {
 
 
 
+    router.get('/username/:username', (req, res) => {
+        const username = req.params.username;
+        collection
+          .findOne({ username })
+          .then((user) => {
+            if (user) {
+              res.json({ _id: user._id });
+            } else {
+              res.status(404).json({ error: 'User not found' });
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: err });
+          });
+      });
 
+//update friends
+    router.put('/:id/friends/:friendId', (req, res) => {
+    const id = req.params.id;
+    const friendId = req.params.friendId;
 
-
+    collection
+        .updateOne(
+        { _id: ObjectID(id) },
+        { $push: { friends: friendId } }
+        )
+        .then(() => {
+        res.json({ message: 'Friend added successfully' });
+        })
+        .catch((err) => {
+        console.error(err);
+        res.status(500).json({ error: err });
+        });
+    });
+    
+  
+    //update wishlist: 
+    router.put('/:id/wishlist/:uuid', (req, res) => {
+      const id = req.params.id;
+      const uuid = req.params.uuid;
+    
+      collection
+        .updateOne(
+          { _id: ObjectID(id) },
+          { $push: { wishlist: uuid } } 
+        )
+        .then(() => {
+          res.json({ message: 'UUID added to wishlist successfully' });
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).json({ error: err });
+        });
+    });
+    
 
 
 

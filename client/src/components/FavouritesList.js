@@ -4,14 +4,11 @@ import React from 'react'
 
 
 const FavouritesList = ({ userFavourites, DisplayUserFavouritePodcasts}) => {
-
-  
-  
   // if (!userFavourites.length) {
-  //   console.log("Faves", userFavourites)
+  //   console.log("please show me all Faves", userFavourites)
   //   return null
   // } 
-  console.log("userFavoruites outside of if", userFavourites )
+  // console.log("userFavoruites outside of if", userFavourites )
   return (
     <>
       <div className='favourites-container'>
