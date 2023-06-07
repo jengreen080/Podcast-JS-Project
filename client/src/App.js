@@ -7,7 +7,7 @@ import LoginPage from './containers/LoginPage';
 import PodcastPage from './containers/PodcastPage';
 import { useState, useEffect } from 'react';
 //ZAD5
-import {getUserId,updateFriends, getUsers, addUser, getUser, updateUser, getFriends } from './services/PodcastUsersServices'
+import {updateWishList, getUserId,updateFriends, getUsers, addUser, getUser, updateUser, getFriends} from './services/PodcastUsersServices'
 import { addReview, getReviews } from './services/PodcastReviewsServices';
 
 
@@ -174,6 +174,19 @@ useEffect(() => {
     
   }
 
+//add wishlist 
+//const [userFavourites, setUserFavourites] = useState([])
+const addPodToWishlist=(currentUserId,podToSaveId)=>{
+  updateWishList(currentUserId,podToSaveId)
+}
+
+
+
+
+
+
+
+
 
 
 const { loading, error, data } = useQuery(GET_PODCAST_BY_INPUT, {
@@ -240,6 +253,7 @@ return (
     selectedPodcast={selectedPodcast} />} 
     />
     <Route path="/podcast/:id" element= {<PodcastPage
+    addPodToWishlist={addPodToWishlist}
     createReview={createReview}
     loggedIn={loggedIn}
     userFavourites={userFavourites}
