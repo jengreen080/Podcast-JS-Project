@@ -84,7 +84,7 @@ html {
   width: 20vw;
 }
 
-#nav-button {
+#searchButton, #clearButton {
   height: 4.75vh;
   margin-left: 0.25vw;
 }

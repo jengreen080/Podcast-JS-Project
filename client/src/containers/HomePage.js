@@ -8,7 +8,8 @@ import Follows from '../components/Follows';
 import styled from 'styled-components';
 
 
-const HomePage = ({addFriend, displayTop5Podcasts,loggedIn, friends, searchTerm, updateSearchTerm, likeCounter, setLikeCounter, selectedPodcast, likeButtonText, setLikeButtonText, userFavourites, DisplayUserFavouritePodcasts, allReviews}) => {
+
+const HomePage = ({addFriend, displayTop5Podcasts,loggedIn, friends, searchTerm, updateSearchTerm, likeCounter, setLikeCounter, selectedPodcast, likeButtonText, setLikeButtonText, userFavourites, DisplayUserFavouritePodcasts, allReviews, setAllReviews}) => {
   return (
     <div className='home-container'>
       <NavBar loggedIn={loggedIn} searchTerm={searchTerm} updateSearchTerm={updateSearchTerm} selectedPodcast={selectedPodcast}/>
@@ -17,6 +18,7 @@ const HomePage = ({addFriend, displayTop5Podcasts,loggedIn, friends, searchTerm,
       loggedIn={loggedIn}
       addFriend={addFriend}
       allReviews={allReviews}
+      setAllReviews={setAllReviews}
       likeCounter={likeCounter} 
       setLikeCounter={setLikeCounter}
       likeButtonText ={likeButtonText}
@@ -24,10 +26,6 @@ const HomePage = ({addFriend, displayTop5Podcasts,loggedIn, friends, searchTerm,
       />
       <FavouritesList loggedIn={loggedIn} userFavourites={userFavourites} DisplayUserFavouritePodcasts={DisplayUserFavouritePodcasts}/>
       <Follows loggedIn={loggedIn} friends={friends}/>
-
-      
-      {/* Below button will need to be added into tile. Commented out whilst I work on Podcast Information  */}
-      {/* <button onClick={testFriend}>TEST!</button> */}
     </div>
   );
 }

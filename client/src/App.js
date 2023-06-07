@@ -6,7 +6,6 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import PodcastPage from './containers/PodcastPage';
 import { useState, useEffect } from 'react';
-//ZAD5
 import {updateWishList, getUserId,updateFriends, getUsers, addUser, getUser, updateUser, getFriends} from './services/PodcastUsersServices'
 import { addReview, getReviews } from './services/PodcastReviewsServices';
 
@@ -38,7 +37,11 @@ const DisplayTop5Podcasts = () => {
   const { loading, error, data } = useQuery(Get_Top_5_Podcasts);
 
   if (loading) return <p>Loading.....</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (error) return <p>No favourites yet</p>;
+
+  if (!data.getMultiplePodcastSeries) {
+    return <p>Nothing to show</p>
+  }
 
   return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
     <li key={uuid} id='trending-list-item' >
@@ -63,20 +66,24 @@ query getUserFavouritePodcasts($userFavourites: [ID]!) {
 
 
 
-const DisplayUserFavouritePodcasts = (userFavourites) => {
-  const { loading, error, data } = useQuery(Get_User_Favourite_Podcasts,
-     {variables: { userFavourites }
-  });
-  if (loading) return <p>Loading.....</p>;
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
-  return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
-    <li key={uuid} id='fave-list-item' >
-      <img src={imageUrl} alt={name} className='favourite-item-image'></img>
-      {/* <h3 className='favourite-item-title'>{name}</h3> */}
-    </li>
-  ))
+
+  const DisplayUserFavouritePodcasts = (userFavourites) => {
+
+    const { loading, error, data } = useQuery(Get_User_Favourite_Podcasts,
+       {variables: { userFavourites }
+    });
+   
+    if (loading) return <p>Loading.....</p>;
+    if (error) {
+      return <p></p>;
+    }
+
+    return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
+      <li key={uuid} id='fave-list-item' >
+        <img src={imageUrl} alt={name} className='favourite-item-image'></img>
+        {/* <h3 className='favourite-item-title'>{name}</h3> */}
+      </li>
+    ))
 }
 
 
@@ -96,18 +103,6 @@ function App() {
   const [userFavourites, setUserFavourites] = useState([])
   const [allReviews, setAllReviews] = useState([])
  
-  
-//addfav
-// if (!userFavourites.length) {
-  console.log("please show me all Faves", userFavourites)
-//   return null
-// } 
-//zhu test
-// console.log('uuid i am looking for is this ',selectedPodcast.getPodcastSeries.uuid)
-const [uuid, setUuid]=useState(null)
-
-
-
   // Reviews
 
   useEffect(() => {
@@ -236,7 +231,8 @@ useEffect(() => {
 return (
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-    <Route path="/" element= {<HomePage 
+    <Route path="/" element= {<HomePage
+    setAllReviews={setAllReviews}
     loggedIn={loggedIn}
     addFriend={addFriend}
     allReviews={allReviews}
@@ -250,7 +246,7 @@ return (
     setLikeCounter ={setLikeCounter}
     likeButtonText ={likeButtonText}
     setLikeButtonText = {setLikeButtonText}
-    selectedPodcast={selectedPodcast} />} 
+    selectedPodcast={selectedPodcast}/>} 
     />
     <Route path="/podcast/:id" element= {<PodcastPage
     addPodToWishlist={addPodToWishlist}
@@ -272,11 +268,3 @@ return (
 export default App;
 
 
-// return (
-//   <Routes>
-//     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
-//     <Route path="/" element= {<HomePage displayTop5Podcasts = {DisplayTop5Podcasts} loggedIn={loggedIn} testFriend={testFriend}/>} />
-//     <Route path="/podcast/:id"/>
-//   </Routes>
-
-// );
