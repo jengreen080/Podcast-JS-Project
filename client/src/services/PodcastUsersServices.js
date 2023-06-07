@@ -1,5 +1,5 @@
 const baseURL = 'http://localhost:9000/api/podcast/users/'
-//zhu change:
+
 export const getUser=(id)=>{
   return fetch(baseURL + id)
   .then (res=>res.json())
@@ -40,3 +40,20 @@ export const getFriends = (id) => {
   return fetch(baseURL + id + '/friends')
     .then((res) => res.json());
 }
+
+
+//zhu day5
+export const getUserId=(username)=>{
+  return fetch(baseURL+'/username/'+username)
+  .then((res)=>res.json())
+}
+
+export const updateFriends=(id,friendId)=>{
+  return fetch(baseURL+ id +'/friends/'+friendId, {
+    method: 'PUT'
+  })
+  .then((res)=>res.json())
+}
+
+
+// 647cddd43f2e13e9ce290f3f

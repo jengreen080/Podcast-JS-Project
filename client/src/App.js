@@ -6,7 +6,8 @@ import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import PodcastPage from './containers/PodcastPage';
 import { useState, useEffect } from 'react';
-import { getUsers, addUser, getUser, updateUser, getFriends } from './services/PodcastUsersServices'
+//ZAD5
+import {getUserId,updateFriends, getUsers, addUser, getUser, updateUser, getFriends } from './services/PodcastUsersServices'
 import { addReview, getReviews } from './services/PodcastReviewsServices';
 
 
@@ -95,10 +96,21 @@ function App() {
   const [newUser, setNewUser] = useState({})
   const [selectedPodcast, setSelectedPodcast] = useState({})
   const [userFavourites, setUserFavourites] = useState([])
-
   const [allReviews, setAllReviews] = useState([])
  
   
+
+  //addfriend
+  
+  const addFriend=(currentUserId,friendUsername)=>{
+    console.log("addFried has ran:", currentUserId, friendUsername)
+    getUserId(friendUsername)
+      .then(friendIdObj => {
+        console.log(friendIdObj)
+        updateFriends(currentUserId,friendIdObj._id)
+      });
+    
+  }
 
 
   // Reviews
@@ -137,6 +149,7 @@ useEffect(() => {
   getFriends(loggedIn._id)
     .then((friends) => {
       setFriends(friends);
+      console.log("show me my friends", friends)
     })
     .catch((error) => {
       console.error(error);
@@ -194,6 +207,8 @@ return (
   <Routes>
     <Route path="/login" element={<LoginPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} allUsers={allUsers} setAllUsers={setAllUsers} handleLogin={handleLogin} createUser={createUser} handleNewUser={handleNewUser} />} />
     <Route path="/" element= {<HomePage 
+    loggedIn={loggedIn}
+    addFriend={addFriend}
     allReviews={allReviews}
     friends={friends}
     displayTop5Podcasts = {DisplayTop5Podcasts} 
