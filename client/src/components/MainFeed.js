@@ -11,9 +11,9 @@ padding: 20px;
 border: solid;
 border-radius: 10px;
 box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-`
+`//ZAday5
 
-const MainFeed = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonText, allReviews}) => {
+const MainFeed = ({loggedIn,addFriend, likeCounter, setLikeCounter, likeButtonText, setLikeButtonText, allReviews}) => {
 
   const reviewElements = allReviews.map((review) => {
 
@@ -23,9 +23,12 @@ const MainFeed = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonTex
       <StyledTileComponent>
         <li className='review-tile' >
           <h3>{review.username}</h3>
+          <button onClick={()=>addFriend(loggedIn._id,review.username)}>follow</button>
           <h5>{review.podcast.name}</h5>
+          <img src={review.podcast.imgUrl}  style={{ width: '100px', height: 'auto' }}/>
+          {/* <button onclick={()=>addToFav}>⭐️</button> */}
+          
           <p>{review.text}</p>
-          {/* <img src={review.podcast.imgUrl} /> */}
           <LikeButton>{likeButtonText}</LikeButton>
           <button>Comment</button>
         </li>

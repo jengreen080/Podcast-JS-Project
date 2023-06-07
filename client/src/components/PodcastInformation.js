@@ -9,7 +9,7 @@ const StyledImage = styled.img`
 width: 50%;
 `
 
-const PodcastInformation = ({selectedPodcast, loggedIn, createReview}) => {
+const PodcastInformation = ({addPodToWishlist,selectedPodcast, loggedIn, createReview}) => {
 
   const navigate = useNavigate();
 
@@ -60,8 +60,8 @@ const PodcastInformation = ({selectedPodcast, loggedIn, createReview}) => {
       <StyledImage src={selectedPodcast.getPodcastSeries.imageUrl}/>
       <h3>{selectedPodcast.getPodcastSeries.name}</h3>
       <p>{selectedPodcast.getPodcastSeries.description}</p>
-      <button>Add To Favourites</button>
-
+      <button onClick={()=>{addPodToWishlist(loggedIn._id,selectedPodcast.getPodcastSeries.uuid)}}>Add To Favourites</button>
+     
 
       <form onSubmit={handleSubmit}>
         <label for='podcast-review-select'>Rate: </label>
