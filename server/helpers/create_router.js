@@ -132,6 +132,24 @@ const createRouter = function (collection) {
     });
     
   
+    //update wishlist: 
+    router.put('/:id/wishlist/:uuid', (req, res) => {
+      const id = req.params.id;
+      const uuid = req.params.uuid;
+    
+      collection
+        .updateOne(
+          { _id: ObjectID(id) },
+          { $push: { wishlist: uuid } } 
+        )
+        .then(() => {
+          res.json({ message: 'UUID added to wishlist successfully' });
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).json({ error: err });
+        });
+    });
     
     
     

@@ -44,6 +44,7 @@ const DisplayTop5Podcasts = () => {
     <li key={uuid} id='trending-list-item' >
       <img src={imageUrl} alt={name} className='trending-item-image'></img>
       <h3 className='trending-item-title'>{name}</h3>
+      {/* <h3>{description}</h3> */}
     </li>
   ))
 }
@@ -62,24 +63,21 @@ query getUserFavouritePodcasts($userFavourites: [ID]!) {
 
 
 
-  const DisplayUserFavouritePodcasts = (userFavourites) => {
-
-    const { loading, error, data } = useQuery(Get_User_Favourite_Podcasts,
-       {variables: { userFavourites }
-    });
-   
-    if (loading) return <p>Loading.....</p>;
-    if (error) {
-      return <p>Error: {error.message}</p>;
-    }
-
-    return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
-      <li key={uuid} id='fave-list-item' >
-        <img src={imageUrl} alt={name} className='favourite-item-image'></img>
-        {/* <h3 className='favourite-item-title'>{name}</h3> */}
-      </li>
-    ))
+const DisplayUserFavouritePodcasts = (userFavourites) => {
+  const { loading, error, data } = useQuery(Get_User_Favourite_Podcasts,
+     {variables: { userFavourites }
+  });
+  if (loading) return <p>Loading.....</p>;
+  if (error) {
+    return <p>Error: {error.message}</p>;
   }
+  return data.getMultiplePodcastSeries.map(({uuid, name, description, imageUrl}) => (
+    <li key={uuid} id='fave-list-item' >
+      <img src={imageUrl} alt={name} className='favourite-item-image'></img>
+      {/* <h3 className='favourite-item-title'>{name}</h3> */}
+    </li>
+  ))
+}
 
 
 function App() {
@@ -99,18 +97,15 @@ function App() {
   const [allReviews, setAllReviews] = useState([])
  
   
+//addfav
+// if (!userFavourites.length) {
+  console.log("please show me all Faves", userFavourites)
+//   return null
+// } 
+//zhu test
+// console.log('uuid i am looking for is this ',selectedPodcast.getPodcastSeries.uuid)
+const [uuid, setUuid]=useState(null)
 
-  //addfriend
-  
-  const addFriend=(currentUserId,friendUsername)=>{
-    console.log("addFried has ran:", currentUserId, friendUsername)
-    getUserId(friendUsername)
-      .then(friendIdObj => {
-        console.log(friendIdObj)
-        updateFriends(currentUserId,friendIdObj._id)
-      });
-    
-  }
 
 
   // Reviews
@@ -143,6 +138,13 @@ function App() {
     navigate("/");
 }
 
+
+
+
+
+
+
+
 // show friends
 const [friends, setFriends] = useState([]);
 useEffect(() => {
@@ -156,6 +158,21 @@ useEffect(() => {
     });
 }, [loggedIn._id]);
 
+
+  //addfriend
+  
+  const addFriend=(currentUserId,friendUsername)=>{
+    console.log("addFried has ran:", currentUserId, friendUsername)
+    getUserId(friendUsername)
+      .then(friendIdObj => {
+        console.log(friendIdObj)
+        updateFriends(currentUserId,friendIdObj._id)
+        .then(() => getFriends(currentUserId))
+        .then( (friendsFromDb) => setFriends(friendsFromDb))
+        .catch(err => console.log("addFriend function failed:", err))
+      });
+    
+  }
 
 
 

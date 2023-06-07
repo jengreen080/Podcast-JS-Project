@@ -25,8 +25,10 @@ const MainFeed = ({loggedIn,addFriend, likeCounter, setLikeCounter, likeButtonTe
           <h3>{review.username}</h3>
           <button onClick={()=>addFriend(loggedIn._id,review.username)}>follow</button>
           <h5>{review.podcast.name}</h5>
+          <img src={review.podcast.imgUrl}  style={{ width: '100px', height: 'auto' }}/>
+          {/* <button onclick={()=>addToFav}>⭐️</button> */}
+          
           <p>{review.text}</p>
-          {/* <img src={review.podcast.imgUrl} /> */}
           <LikeButton>{likeButtonText}</LikeButton>
           <button>Comment</button>
         </li>

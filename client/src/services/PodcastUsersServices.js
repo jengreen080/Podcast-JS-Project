@@ -56,4 +56,11 @@ export const updateFriends=(id,friendId)=>{
 }
 
 
-// 647cddd43f2e13e9ce290f3f
+export const updateWishList=(id,uuid)=>{
+  return fetch(baseURL+ id +'/wishlist/'+uuid, {
+    method: 'PUT'
+  })
+  .then((res)=>res.json())
+}
+
+
