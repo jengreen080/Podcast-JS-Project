@@ -171,10 +171,14 @@ useEffect(() => {
 
 //add wishlist 
 //const [userFavourites, setUserFavourites] = useState([])
+// const addPodToWishlist=(currentUserId,podToSaveId)=>{
+//   updateWishList(currentUserId,podToSaveId)
+// }
+
 const addPodToWishlist=(currentUserId,podToSaveId)=>{
   updateWishList(currentUserId,podToSaveId)
+  .then(()=>{setUserFavourites(userFavourites=>[...userFavourites,podToSaveId])})
 }
-
 
 
 
