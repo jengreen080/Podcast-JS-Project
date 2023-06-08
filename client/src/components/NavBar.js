@@ -13,7 +13,7 @@ const NavBar = ({loggedIn, searchTerm, updateSearchTerm, selectedPodcast}) => {
   }
 
   const handleQueryChange = (event) => {
-    setQuery(event.target.value.toLowerCase())
+    setQuery(event.target.value)
   }
 
   return (

@@ -8,13 +8,16 @@ import { Collapse } from 'antd'
 const { Panel } = Collapse;
 
 const StyledTileComponent = styled.div`
-background-color: thistle;
+background-color: rgb(16, 16, 17);
 width: 80%;
 margin: auto;
 padding: 20px;
 border: solid;
 border-radius: 10px;
-box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+box-shadow: rgba(249, 249, 249, 0.02) 0px 1px 3px 0px, rgba(255, 255, 255, 0.15) 0px 0px 0px 1px;
+list-style-type: none;
+margin-bottom: 5vh;
+align-self: center;
 `
 
 const ReviewItem = ({loggedIn, review, allReviews, setAllReviews, addFriend}) => {
@@ -59,31 +62,39 @@ const ReviewItem = ({loggedIn, review, allReviews, setAllReviews, addFriend}) =>
 
     const commentElements = review.comments.map((comment) => {
       return (
-        <li>
-          <p>{comment.username}</p>
-          <p>{comment.text}</p>
+        <li className='comment-element-container'>
+          <p className='comment-element-name'>{comment.username}:</p>
+          <p className='comment-element-text'>"{comment.text}"</p>
         </li>
       )
     })
 
   return (
     <StyledTileComponent review={review}>
-    <li className='review-tile' >
-      <h3>{review.username}</h3>
-      <button onClick={()=>addFriend(loggedIn._id,review.username)}>follow</button>
-      <h5>{review.podcast.name}</h5>
-      <p>{review.text}</p>
-      {/* <img src={review.podcast.imgUrl} /> */}
-      {/* <LikeButton likeButtonText={likeButtonText} setLikeButtonText={setLikeButtonText} setLikeCounter={setLikeCounter} likeCounter={likeCounter} review={review} tileToTouch={tileToTouch} setTileToTouch={setTileToTouch} loggedIn={loggedIn}  /> */}
-      <form onSubmit={(event) => handleComment(event)}>
-        <input type='text' onChange={handleCommentChange} />
-        <input hidden name="id"  value={review._id}/>
-        <button type='submit'>Comment</button>
-      </form>
+    <li className='review-tile'>
+      <div className='image-name-podcast'>
+        <img src={review.podcast.imgUrl} className='review-image' />
+        <div className='name-podcast'>
+          <div className='username-container'>
+            <h3 className='review-username'>{review.username}</h3>
+            <button className='follow-button' onClick={()=>addFriend(loggedIn._id,review.username)} >Follow</button>
+          </div>
+          <h5 className='rating-podcast'>{review.rating}/5: {review.podcast.name}</h5>
+        </div>
+      </div>
+      <div className='form-comments-container'>
+        <p className='review-text'>"{review.text}"</p>
+        {/* <LikeButton likeButtonText={likeButtonText} setLikeButtonText={setLikeButtonText} setLikeCounter={setLikeCounter} likeCounter={likeCounter} review={review} tileToTouch={tileToTouch} setTileToTouch={setTileToTouch} loggedIn={loggedIn}  /> */}
+        <form onSubmit={(event) => handleComment(event)}>
+          <input type='text' placeholder='Comment..' onChange={handleCommentChange} className='comment-input' />
+          <input hidden name="id"  value={review._id}/>
+          <button type='submit' className='comment-submit-button'>Post</button>
+        </form>
+      </div>
     </li>
     <div>
-    <Collapse>
-      <Panel header="Comments" key="1">
+    <Collapse className='collapse'>
+      <Panel header="Comments" key="1" className='panel'>
         <ul>
           {commentElements}
         </ul>

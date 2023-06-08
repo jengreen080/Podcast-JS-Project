@@ -37,7 +37,7 @@ const DisplayTop5Podcasts = () => {
   const { loading, error, data } = useQuery(Get_Top_5_Podcasts);
 
   if (loading) return <p>Loading.....</p>;
-  if (error) return <p>No favourites yet</p>;
+  if (error) return <p>Oh oh! Something went wrong!</p>;
 
   if (!data.getMultiplePodcastSeries) {
     return <p>Nothing to show</p>

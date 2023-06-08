@@ -58,24 +58,28 @@ const PodcastInformation = ({addPodToWishlist,selectedPodcast, loggedIn, createR
   return (
     <div className='podcast-information-container'>
       <StyledImage src={selectedPodcast.getPodcastSeries.imageUrl}/>
-      <h3>{selectedPodcast.getPodcastSeries.name}</h3>
-      <p>{selectedPodcast.getPodcastSeries.description}</p>
-      <button onClick={()=>{addPodToWishlist(loggedIn._id,selectedPodcast.getPodcastSeries.uuid)}}>Add To Favourites</button>
+      <h3 className='podcast-title' >{selectedPodcast.getPodcastSeries.name}</h3>
+      <p className='pp_paragraph'>{selectedPodcast.getPodcastSeries.description}</p>
+      <br></br>
+      <button className='add-faves-button' onClick={()=>{addPodToWishlist(loggedIn._id,selectedPodcast.getPodcastSeries.uuid)}}>Add To Favourites</button>
      
 
-      <form onSubmit={handleSubmit}>
-        <label for='podcast-review-select'>Rate: </label>
-        <select name='podcast-review-select' onChange={handleRatingChange}>
+      <form className='pp_form' onSubmit={handleSubmit}>
+        <br></br>
+        <label className='pp_label' for='podcast-review-select'>Rate: </label>
+        <select className='pp_rating' name='podcast-review-select' onChange={handleRatingChange}>
+        <option disabled selected value> -- select an option -- </option>
           <option value='5' >5</option>
           <option value='4' >4</option>
           <option value='3' >3</option>
           <option value='2' >2</option>
           <option value='1' >1</option>
         </select>
-        <label for='podcast-review-input'>Leave a comment:</label>
+        <br></br>
+        <label className='pp_label' for='podcast-review-input'>Leave a comment:</label>
         {/* <input type="text" onChange={handleTextChange}></input> */}
-        <textarea rows="4" cols="50" name="comment" form="review-form" placeholder='Enter text here...' onChange={handleTextChange}></textarea>
-        <button type='submit'>Submit</button>
+        <textarea className='pp_text_box' rows="4" cols="50" name="comment" form="review-form" placeholder='Enter text here...' onChange={handleTextChange}></textarea>
+        <button className='review-submit-button' type='submit'>Submit</button>
       </form>
     </div>
   );

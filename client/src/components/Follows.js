@@ -14,7 +14,7 @@ const Follows = ({loggedIn, friends}) => {
   }
   
   const friendsInfo = friends.map((friend) =>
-  <div key={friend._id}>
+  <div key={friend._id} className='friend-list-item'>
   <li>{friend.username}</li>
   {/* <li>Fav:{friend.wishlist}</li> */}
 </div>);

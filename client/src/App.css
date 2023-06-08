@@ -89,17 +89,28 @@ html {
   margin-left: 0.25vw;
 }
 
-#nav-button:hover {
-  cursor: pointer;
-  transition: 0.3s;
+#searchButton, #clearButton  {
+  background-color: rgb(50, 185, 172);
+  color: white;
+  border: purple;
+  font-family: 'Courier New', Courier, monospace;
 }
+
+#searchButton:hover, #clearButton:hover {
+  background-color: purple;
+  color: white;
+  transition: 0.3s;
+  border: rgb(50, 185, 172);
+  cursor: pointer;
+}
+
 
 .nav-link-container {
   display: flex;
   list-style-type: none;
   width: 20vw;
   justify-content: space-evenly;
-  /* background-color: lightblue; */
+  
 }
 
 #nav-list-item {
@@ -118,17 +129,158 @@ html {
 
 .home-container {
   margin: 12.5vh 22.5vw;
-  height: 1000vh;
+  height: 500vh;
   border-radius: 10px;
   padding-top: 5vh;
+  padding-right: 2.5vw;
   box-shadow: rgba(255, 255, 255, 0.07) 0px 1px 2px, rgba(255, 255, 255, 0.883) 0px 2px 4px, rgb(255, 255, 255) 0px 4px 8px, rgba(255, 252, 252, 0.766) 0px 8px 16px, rgba(254, 253, 253, 0.07) 0px 16px 32px, rgba(255, 255, 255, 0.07) 0px 32px 64px;
-  background-color: black;
+  /* background-color: black; */
 }
 
 /* Main Feed */
 
 .review-tile {
   color: white;
+  /* background-color: lightblue; */
+  margin-bottom: 2vh;
+}
+
+.image-name-podcast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: lightpink; */
+  padding-right: 5vw;
+  font-family: 'Courier New', Courier, monospace;
+
+}
+
+.name-podcast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: rgb(28, 28, 28); */
+  width: 20vw;
+}
+
+.username-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* background-color: lightseagreen; */
+  width: 10vw;
+  margin-bottom: 3vh;
+}
+
+.review-username { 
+  margin: 0;
+  font-size: 40px;
+}
+
+.follow-button {
+  height: 1.5rem;
+}
+
+.review-image {
+  height: 25vh;
+  width: 13.5vw;
+  border-radius: 10px;
+}
+
+.rating-podcast {
+  font-size: 30px;
+  margin: 0;
+}
+
+.form-comments-container{ 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-text {
+  /* background-color: lightpink; */
+  width: 35vw;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 30px;
+  color: rgb(50, 185, 172);
+  /* background-color: lightblue; */
+}
+
+.comment-input { 
+  height: 5vh;
+  width: 30vw;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.follow-button {
+  height: 4vh;
+  background-color: purple;
+  color: white;
+  border: purple;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.follow-button:hover {
+  background-color: rgb(50, 185, 172);
+  color: white;
+  transition: 0.3s;
+  border: rgb(50, 185, 172);
+  cursor: pointer;
+}
+
+.comment-submit-button {
+  height: 5.75vh;
+  background-color: purple;
+  color: white;
+  border: purple;
+  font-family: 'Courier New', Courier, monospace;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.comment-submit-button:hover {
+  background-color: rgb(50, 185, 172);
+  color: white;
+  transition: 0.3s;
+  border: rgb(50, 185, 172);
+  cursor: pointer;
+}
+
+.collapse { 
+  color: white;
+  border-radius: 10px;
+}
+
+.panel {
+  background-color: white;
+  /* border-radius: 10px; */
+  color: white;
+}
+
+/* Comment Elements */
+
+.comment-element-container {
+  display: flex;
+  background-color: lightblue;
+  margin-bottom: 1vh;
+  justify-content: space-between;
+  padding: 0 2vw;
+  background-color: rgb(18, 8, 28);
+  color: white;
+  border-radius: 10px;
+}
+
+.comment-element-name {
+  color: turquoise
+}
+
+.comment-element-text {
+  /* color: turquoise */
 }
 
 /* Trending CSS */
@@ -262,7 +414,7 @@ font-family: 'Courier New', Courier, monospace;
 /* Follows CSS */
 
 .follows-container{
-  padding-right: 1vw;
+  padding-right: 2vw;
   position: fixed;
   width: 20vw;
   height: 45%;
@@ -283,6 +435,14 @@ font-family: 'Courier New', Courier, monospace;
   list-style-type: none;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.friend-list-item {
+  background-color: purple;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 2.5px;
 }
 
 /* Login Page CSS */
@@ -362,8 +522,9 @@ font-family: 'Courier New', Courier, monospace;
   color: rgb(50, 185, 172);
 }
 
-/* Podcast Page */
 
+
+/* Podcast Page */
 .podcast-information-container {
   display: flex;
   flex-direction: column;
@@ -371,4 +532,66 @@ font-family: 'Courier New', Courier, monospace;
   align-items: center;
   padding: 0 5vw;
   color: white;
+}
+.pp_text_box {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.pp_form {
+  display:flex;
+  flex-direction: column;
+  margin: auto;
+}
+.review-submit-button {
+  display: flex;
+  margin-top: 1vh;
+  flex-direction: column;
+  background-color: purple;
+  color: white;
+  border: purple;
+  margin: auto;
+  padding: 5px;
+  border-radius: 5px;
+  font-family: ‘Courier New’, Courier, monospace;
+}
+
+.review-submit-button:hover {
+  background-color: rgb(50, 185, 172);
+  color: white;
+  transition: 0.3s;
+  border: rgb(50, 185, 172);
+  cursor: pointer;
+}
+.add-faves-button {
+  background-color: rgb(50, 185, 172);
+  color: white;
+  padding: 5px;
+  transition: 0.3s;
+  border: rgb(50, 185, 172);
+  cursor: pointer;
+  margin: auto;
+  border-radius: 5px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.add-faves-button:hover { 
+  background-color: rgb(50, 185, 172);
+  color: white;
+  transition: 0.3s;
+  border: rgb(50, 185, 172);
+  cursor: pointer;
+}
+.pp_rating {
+  margin: auto;
+  margin-top: 1.5vh; 
+}
+.pp_label {
+  margin: auto;
+}
+.pp_paragraph {
+  margin: auto;
+  width: 70%;
+  text-align: justify;
 }
