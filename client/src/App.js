@@ -157,7 +157,7 @@ useEffect(() => {
   //addfriend
   
   const addFriend=(currentUserId,friendUsername)=>{
-    console.log("addFried has ran:", currentUserId, friendUsername)
+    console.log("addFriend has run:", currentUserId, friendUsername)
     getUserId(friendUsername)
       .then(friendIdObj => {
         console.log(friendIdObj)

@@ -11,8 +11,8 @@ const client = new ApolloClient({
   // does the above change? Would this be localhost
   cache: new InMemoryCache(),
   headers: {
-    "X-USER-ID": 438,
-    "X-API-KEY": "fc365a9f910d04cbcd255cbedfe73159cbd36d5d7c8f7feafa4ec829816af52c81006e0a0c5a4f69ccd721c50f5f79d895"
+    "X-USER-ID": 440,
+    "X-API-KEY": "9e394effe2152c24b7382130f9e9f587c894099539260e24db752173ea2c55bb114acaf4c288d7ca901e09e0b50f7f8d4c"
   }
 });
 

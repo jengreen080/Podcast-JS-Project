@@ -19,7 +19,7 @@ const MainFeed = ({likeCounter, setLikeCounter, likeButtonText, setLikeButtonTex
 
   return (
       <ul>
-        {reviewElements}
+        {reviewElements.reverse()}
       </ul>
   );
 }
